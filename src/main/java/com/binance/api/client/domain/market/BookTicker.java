@@ -1,8 +1,9 @@
 package com.binance.api.client.domain.market;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 /**
  * Represents the best price/qty on the order book for a given symbol.
@@ -77,7 +78,7 @@ public class BookTicker {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("symbol", symbol)
         .append("bidPrice", bidPrice)
         .append("bidQty", bidQty)

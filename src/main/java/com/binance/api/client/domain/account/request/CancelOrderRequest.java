@@ -1,7 +1,7 @@
 package com.binance.api.client.domain.account.request;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Request object for canceling an order.
@@ -56,7 +56,7 @@ public class CancelOrderRequest extends OrderRequest {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("orderId", orderId)
         .append("origClientOrderId", origClientOrderId)
         .append("newClientOrderId", newClientOrderId)

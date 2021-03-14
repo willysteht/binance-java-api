@@ -26,12 +26,12 @@ public class BinanceApiWebSocketListener<T> extends WebSocketListener {
 
   public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, Class<T> eventClass) {
     this.callback = callback;
-    this.objectReader = mapper.readerFor(eventClass);
+    this.objectReader = mapper.reader(eventClass);
   }
 
   public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, TypeReference<T> eventTypeReference) {
     this.callback = callback;
-    this.objectReader = mapper.readerFor(eventTypeReference);
+    this.objectReader = mapper.reader(eventTypeReference);
   }
 
   @Override

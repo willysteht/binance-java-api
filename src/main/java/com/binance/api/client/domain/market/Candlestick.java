@@ -1,15 +1,16 @@
 package com.binance.api.client.domain.market;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 /**
  * Kline/Candlestick bars for a symbol. Klines are uniquely identified by their open time.
  */
-@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+//@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 @JsonPropertyOrder()
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Candlestick {
@@ -126,7 +127,7 @@ public class Candlestick {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("openTime", openTime)
         .append("open", open)
         .append("high", high)

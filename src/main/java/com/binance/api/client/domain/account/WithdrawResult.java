@@ -1,8 +1,9 @@
 package com.binance.api.client.domain.account;
 
+import com.binance.api.client.ToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
+
 
 /**
  * A withdraw result that was done to a Binance account.
@@ -51,7 +52,7 @@ public class WithdrawResult {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        return new ToStringBuilder()
                 .append("msg", msg)
                 .append("success", success)
                 .append("id", id)

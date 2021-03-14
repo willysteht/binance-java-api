@@ -1,10 +1,11 @@
 package com.binance.api.client.domain.event;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.exception.UnsupportedEventException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 /**
  * User data update event which can be of four types:
@@ -72,7 +73,7 @@ public class UserDataUpdateEvent {
 
   @Override
   public String toString() {
-    ToStringBuilder sb = new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    ToStringBuilder sb = new ToStringBuilder()
         .append("eventType", eventType)
         .append("eventTime", eventTime);
     if (eventType == UserDataUpdateEventType.ACCOUNT_UPDATE) {

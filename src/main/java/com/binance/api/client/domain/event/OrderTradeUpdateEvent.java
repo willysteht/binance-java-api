@@ -1,10 +1,11 @@
 package com.binance.api.client.domain.event;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 /**
  * Order or trade report update event.
@@ -342,7 +343,7 @@ public class OrderTradeUpdateEvent {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("eventType", eventType)
         .append("eventTime", eventTime)
         .append("symbol", symbol)

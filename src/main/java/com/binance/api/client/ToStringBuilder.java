@@ -13,7 +13,7 @@ public class ToStringBuilder {
 
     public<T> ToStringBuilder append(String in1, T in2)
     {
-        stringBuilder.append(in1).append(" ").append(String.valueOf(in2)).append("\n");
+        stringBuilder.append(in1).append(" ").append(String.valueOf(in2)).append(" ");
         return this;
     }
 

@@ -1,6 +1,7 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
@@ -24,7 +25,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	private final BinanceApiService binanceApiService;
 
 	public BinanceApiRestClientImpl(String apiKey, String secret) {
-		binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+		binanceApiService = createService(BinanceApiService.class, apiKey, secret, BinanceEngineType.SPOT);
 	}
 
 	// General endpoints

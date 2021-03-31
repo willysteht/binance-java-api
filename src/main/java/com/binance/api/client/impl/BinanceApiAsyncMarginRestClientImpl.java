@@ -2,6 +2,7 @@ package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiAsyncMarginRestClient;
 import com.binance.api.client.BinanceApiCallback;
+import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
@@ -23,7 +24,7 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
     private final BinanceApiService binanceApiService;
 
     public BinanceApiAsyncMarginRestClientImpl(String apiKey, String secret) {
-        binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+        binanceApiService = createService(BinanceApiService.class, apiKey, secret, BinanceEngineType.SPOT);
     }
 
     // Margin Account endpoints

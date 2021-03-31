@@ -80,7 +80,7 @@ public interface BinanceApiAsyncRestClient {
    * Get older trades. Weight: 5
    *
    * @param symbol ticker symbol (e.g. ETHBTC)
-   * @param limit of last trades (Default 500; max 1000.)
+   * @param limit of last trades (Default 500; max 1000.)getMyTrades
    * @param fromId TradeId to fetch from. Default gets most recent trades.
    * @param callback the callback that handles the response
    */

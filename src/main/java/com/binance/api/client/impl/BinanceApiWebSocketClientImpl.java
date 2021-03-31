@@ -2,6 +2,7 @@ package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiCallback;
 import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.domain.event.*;
 import com.binance.api.client.domain.market.CandlestickInterval;
@@ -21,14 +22,16 @@ import java.util.stream.Collectors;
 public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient, Closeable {
 
     private final OkHttpClient client;
+    private final BinanceEngineType engineType;
 
-    public BinanceApiWebSocketClientImpl(OkHttpClient client) {
+    public BinanceApiWebSocketClientImpl(OkHttpClient client, BinanceEngineType engineType) {
         this.client = client;
+        this.engineType = engineType;
     }
 
     @Override
     public Closeable onDepthEvent(String symbols, BinanceApiCallback<DepthEvent> callback) {
-        final String channel = Arrays.stream(symbols.split(","))
+        final String channel = Arrays.stream(symbols.toLowerCase().split(","))
                 .map(String::trim)
                 .map(s -> String.format("%s@depth", s))
                 .collect(Collectors.joining("/"));
@@ -37,7 +40,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 
     @Override
     public Closeable onCandlestickEvent(String symbols, CandlestickInterval interval, BinanceApiCallback<CandlestickEvent> callback) {
-        final String channel = Arrays.stream(symbols.split(","))
+        final String channel = Arrays.stream(symbols.toLowerCase().split(","))
                 .map(String::trim)
                 .map(s -> String.format("%s@kline_%s", s, interval.getIntervalId()))
                 .collect(Collectors.joining("/"));
@@ -45,7 +48,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
     }
 
     public Closeable onAggTradeEvent(String symbols, BinanceApiCallback<AggTradeEvent> callback) {
-        final String channel = Arrays.stream(symbols.split(","))
+        final String channel = Arrays.stream(symbols.toLowerCase().split(","))
                 .map(String::trim)
                 .map(s -> String.format("%s@aggTrade", s))
                 .collect(Collectors.joining("/"));
@@ -58,7 +61,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 
     @Override
     public Closeable onTickerEvent(String symbols, BinanceApiCallback<TickerEvent> callback) {
-        final String channel = Arrays.stream(symbols.split(","))
+        final String channel = Arrays.stream(symbols.toLowerCase().split(","))
                 .map(String::trim)
                 .map(s -> String.format("%s@ticker", s))
                 .collect(Collectors.joining("/"));
@@ -73,7 +76,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 
     @Override
     public Closeable onBookTickerEvent(String symbols, BinanceApiCallback<BookTickerEvent> callback) {
-        final String channel = Arrays.stream(symbols.split(","))
+        final String channel = Arrays.stream(symbols.toLowerCase().split(","))
                 .map(String::trim)
                 .map(s -> String.format("%s@bookTicker", s))
                 .collect(Collectors.joining("/"));
@@ -93,7 +96,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
     }
 
     private Closeable createNewWebSocket(String channel, BinanceApiWebSocketListener<?> listener) {
-        String streamingUrl = String.format("%s/%s", BinanceApiConfig.getStreamApiBaseUrl(), channel);
+        String streamingUrl = String.format("%s/%s", engineType.equals(BinanceEngineType.SPOT) ? BinanceApiConfig.getStreamApiBaseUrl() : BinanceApiConfig.getFuturesStreamApiBaseUrl(), channel);
         Request request = new Request.Builder().url(streamingUrl).build();
         final WebSocket webSocket = client.newWebSocket(request, listener);
         return () -> {

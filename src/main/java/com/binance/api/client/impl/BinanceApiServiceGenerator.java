@@ -1,6 +1,7 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiError;
+import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.exception.BinanceApiException;
 import com.binance.api.client.security.AuthenticationInterceptor;
@@ -38,16 +39,16 @@ public class BinanceApiServiceGenerator {
 
     @SuppressWarnings("unchecked")
     private static final Converter<ResponseBody, BinanceApiError> errorBodyConverter =
-            (Converter<ResponseBody, BinanceApiError>)converterFactory.responseBodyConverter(
+            (Converter<ResponseBody, BinanceApiError>) converterFactory.responseBodyConverter(
                     BinanceApiError.class, new Annotation[0], null);
 
     public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null, null);
+        return createService(serviceClass, null, null, null);
     }
 
-    public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
+    public static <S> S createService(Class<S> serviceClass, String apiKey, String secret, BinanceEngineType engineType) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl(BinanceApiConfig.getApiBaseUrl())
+                .baseUrl(engineType.equals(BinanceEngineType.SPOT) ? BinanceApiConfig.getApiBaseUrl() : BinanceApiConfig.getFuturesApiBaseUrl())
                 .addConverterFactory(converterFactory);
 
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {

@@ -232,6 +232,8 @@ public interface BinanceApiRestClient {
   
   List<Trade> getMyTrades(String symbol, Long fromId);
 
+  List<Trade> getMyTrades(String symbol, Long fromId,int limit);
+
   /**
    * Submit a withdraw request.
    *
@@ -266,6 +268,8 @@ public interface BinanceApiRestClient {
    * @return withdraw history, containing a list of withdrawals
    */
   WithdrawHistory getWithdrawHistory(String asset);
+
+  WithdrawHistory getWithdrawHistory(long startTime, long endTime);
 
   /**
    * Fetch sub-account transfer history.

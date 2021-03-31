@@ -202,6 +202,12 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
+	public List<Trade> getMyTrades(String symbol, Long fromId,int limit) {
+		return getMyTrades(symbol, limit, fromId, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+				System.currentTimeMillis());
+	}
+
+	@Override
 	public WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag) {
 		return executeSync(binanceApiService.withdraw(asset, address, amount, name, addressTag,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
@@ -246,6 +252,12 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	@Override
 	public WithdrawHistory getWithdrawHistory(String asset) {
 		return executeSync(binanceApiService.getWithdrawHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+				System.currentTimeMillis()));
+	}
+
+	@Override
+	public WithdrawHistory getWithdrawHistory(long startTime, long endTime) {
+		return executeSync(binanceApiService.getWithdrawHistory(startTime,endTime, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				System.currentTimeMillis()));
 	}
 

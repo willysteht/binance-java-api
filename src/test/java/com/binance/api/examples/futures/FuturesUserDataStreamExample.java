@@ -1,7 +1,6 @@
 package com.binance.api.examples.futures;
 
 import com.binance.api.client.BinanceApiFuturesRestClient;
-import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.event.AccountUpdateEvent;
 import com.binance.api.client.domain.event.OrderTradeUpdateEvent;
@@ -16,10 +15,12 @@ import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
  * as well as update on trades/orders on a user account.
  */
 public class FuturesUserDataStreamExample {
+    private static final String API_KEY = "";
+    private static final String SECRET_KEY = "";
 
     public static void main(String[] args) {
-        BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory("YOUR_API_KEY", "YOUR_SECRET");
-        BinanceApiRestClient client = factory.newRestClient();
+        BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory(API_KEY, SECRET_KEY);
+        BinanceApiFuturesRestClient client = factory.newFuturesRestClient();
 
         // First, we obtain a listenKey which is required to interact with the user data stream
         String listenKey = client.startUserDataStream();

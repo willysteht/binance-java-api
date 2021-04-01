@@ -10,9 +10,11 @@ import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
  */
 public class FuturesAccountExample {
     private static final String SYMBOL = "LINKUSDT";
+    private static final String API_KEY = "";
+    private static final String SECRET_KEY = "";
 
     public static void main(String[] args) {
-        BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory("YOUR_API_KEY", "YOUR_SECRET");
+        BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory(API_KEY, SECRET_KEY);
         BinanceApiFuturesRestClient client = factory.newFuturesRestClient();
 
         FuturesAccount account = client.getAccount();

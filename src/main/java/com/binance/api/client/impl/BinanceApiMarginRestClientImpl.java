@@ -62,18 +62,6 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
         return executeSync(binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
-    // user stream endpoints
-
-    @Override
-    public String startUserDataStream() {
-        return executeSync(binanceApiService.startMarginUserDataStream()).toString();
-    }
-
-    @Override
-    public void keepAliveUserDataStream(String listenKey) {
-        executeSync(binanceApiService.keepAliveMarginUserDataStream(listenKey));
-    }
-
     @Override
     public MarginTransaction transfer(String asset, String amount, TransferType type) {
         long timestamp = System.currentTimeMillis();
@@ -115,4 +103,5 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
         long timestamp = System.currentTimeMillis();
         return executeSync(binanceApiService.repay(asset, amount, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp));
     }
+
 }

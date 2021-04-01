@@ -2,7 +2,6 @@ package com.binance.api.client;
 
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
-import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
 
@@ -259,7 +258,6 @@ public interface BinanceApiRestClient {
     DepositAddress getDepositAddress(String asset);
 
     // User stream endpoints
-
     /**
      * Start a new user data stream.
      *

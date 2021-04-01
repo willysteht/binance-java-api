@@ -59,4 +59,19 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
                 orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
                 orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()));
     }
+
+    @Override
+    public String startUserDataStream() {
+        return executeSync(binanceApiService.startUserDataStream()).toString();
+    }
+
+    @Override
+    public void keepAliveUserDataStream(String listenKey) {
+        executeSync(binanceApiService.keepAliveUserDataStream(listenKey));
+    }
+
+    @Override
+    public void closeUserDataStream(String listenKey) {
+        executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
+    }
 }

@@ -53,22 +53,6 @@ public interface BinanceApiMarginRestClient {
      */
     List<Trade> getMyTrades(String symbol);
 
-    // User stream endpoints
-
-    /**
-     * Start a new user data stream.
-     *
-     * @return a listen key that can be used with data streams
-     */
-    String startUserDataStream();
-
-    /**
-     * PING a user data stream to prevent a time out.
-     *
-     * @param listenKey listen key that identifies a data stream
-     */
-    void keepAliveUserDataStream(String listenKey);
-
     /**
      * Execute transfer between spot account and margin account
      * @param asset asset to repay
@@ -122,6 +106,4 @@ public interface BinanceApiMarginRestClient {
      * @return loan records
      */
     LoanQueryResult queryLoan(String asset, String txId);
-
-
 }

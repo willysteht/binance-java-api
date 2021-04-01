@@ -11,11 +11,12 @@ import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
  * @author Mahdi Sheikh Hosseini
  */
 public class FuturesOrdersAsyncExample {
-
     private static final String SYMBOL = "LINKETH";
+    private static final String API_KEY = "";
+    private static final String SECRET_KEY = "";
 
     public static void main(String[] args) {
-        BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory("YOUR_API_KEY", "YOUR_SECRET");
+        BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory(API_KEY, SECRET_KEY);
         BinanceApiAsyncFuturesRestClient client = factory.newAsyncRestClient();
 
 

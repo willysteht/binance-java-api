@@ -4,6 +4,7 @@ import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.*;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
+import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
@@ -100,4 +101,17 @@ public interface BinanceFuturesApiService {
     @GET("/fapi/v2/account")
     Call<FuturesAccount> getAccount(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
+    // User stream endpoints
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @POST("/fapi/v1/listenKey")
+    Call<ListenKey> startUserDataStream();
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @PUT("/fapi/v1/listenKey")
+    Call<Void> keepAliveUserDataStream(@Query("listenKey") String listenKey);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @DELETE("/fapi/v1/listenKey")
+    Call<Void> closeAliveUserDataStream(@Query("listenKey") String listenKey);
 }

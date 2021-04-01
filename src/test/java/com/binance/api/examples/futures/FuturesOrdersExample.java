@@ -18,9 +18,11 @@ import static com.binance.api.client.domain.account.FuturesNewOrder.limitLong;
  */
 public class FuturesOrdersExample {
     private static final String SYMBOL = "LINKUSDT";
+    private static final String API_KEY = "";
+    private static final String SECRET_KEY = "";
 
     public static void main(String[] args) {
-        BinanceFuturesApiClientFactory futuresApiClientFactory = BinanceAbstractFactory.createFuturesFactory("YOUR_API_KEY", "YOUR_SECRET");
+        BinanceFuturesApiClientFactory futuresApiClientFactory = BinanceAbstractFactory.createFuturesFactory(API_KEY, SECRET_KEY);
         BinanceApiFuturesRestClient client = futuresApiClientFactory.newFuturesRestClient();
 
         FuturesNewOrderResponse futuresOrderResponse = client.newOrder(limitLong(SYMBOL, TimeInForce.GTC, WorkingType.CONTRACT_PRICE, "13", "27", false));

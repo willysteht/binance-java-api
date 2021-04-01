@@ -221,16 +221,15 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
                 System.currentTimeMillis()));
     }
 
-    // User stream endpoints
-
+    // user stream endpoints
     @Override
     public String startUserDataStream() {
-        return executeSync(binanceApiService.startUserDataStream()).toString();
+        return executeSync(binanceApiService.startMarginUserDataStream()).toString();
     }
 
     @Override
     public void keepAliveUserDataStream(String listenKey) {
-        executeSync(binanceApiService.keepAliveUserDataStream(listenKey));
+        executeSync(binanceApiService.keepAliveMarginUserDataStream(listenKey));
     }
 
     @Override

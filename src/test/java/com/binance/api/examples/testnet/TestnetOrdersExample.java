@@ -1,15 +1,11 @@
 package com.binance.api.examples.testnet;
 
 import com.binance.api.client.BinanceApiFuturesRestClient;
-import com.binance.api.client.domain.TimeInForce;
-import com.binance.api.client.domain.WorkingType;
+import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.domain.account.FuturesNewOrder;
 import com.binance.api.client.domain.account.FuturesNewOrderResponse;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
-
-import static com.binance.api.client.domain.account.FuturesNewOrder.limitLong;
 
 /**
  * Examples on how to place orders, cancel them.
@@ -17,20 +13,31 @@ import static com.binance.api.client.domain.account.FuturesNewOrder.limitLong;
  * @author Mahdi Sheikh Hosseini
  */
 public class TestnetOrdersExample {
-    private static final String SYMBOL = "LTCUSDT";
+    private static final String SYMBOL = "BTCUSDT";
     private static final String API_KEY = "";
     private static final String SECRET_KEY = "";
 
-    public static void main(String[] args) {
-        BinanceFuturesApiClientFactory futuresApiClientFactory = BinanceAbstractFactory.createTestnetFactory(API_KEY, SECRET_KEY);
-        BinanceApiFuturesRestClient client = futuresApiClientFactory.newFuturesRestClient();
 
-        FuturesNewOrderResponse futuresOrderResponse = client.newOrder(limitLong(SYMBOL, TimeInForce.GTC, WorkingType.CONTRACT_PRICE, "13", "200", false));
-        long orderId = futuresOrderResponse.getOrderId();
-        System.out.println("OrderID: " + orderId);
+    public static void main(String[] args) throws InterruptedException {
+        BinanceFuturesApiClientFactory testnetFactory = BinanceAbstractFactory.createTestnetFactory(API_KEY, SECRET_KEY);
+        BinanceApiWebSocketClient streamClient = testnetFactory.newWebSocketClient();
+        BinanceApiFuturesRestClient restClient = testnetFactory.newFuturesRestClient();
 
-        CancelOrderResponse cancelOrderResponse = client.cancelOrder(new CancelOrderRequest(SYMBOL, orderId));
-        System.out.println("Order Status: " + cancelOrderResponse.getStatus());
+
+        String listenKey = restClient.startUserDataStream();
+
+        streamClient.onUserDataUpdateEvent(listenKey, System.out::println);
+        System.out.println("Waiting for events...");
+
+
+        BinanceApiFuturesRestClient futureClient = testnetFactory.newFuturesRestClient();
+        FuturesNewOrderResponse response1 = futureClient.newOrder(FuturesNewOrder.MarketLong(SYMBOL, "1", false));
+        System.out.println(response1.getStatus());
+
+
+        Thread.sleep(5000);
+        FuturesNewOrderResponse response2 = futureClient.newOrder(FuturesNewOrder.MarketShort(SYMBOL, "1", false));
+        System.out.println(response2);
     }
 
 }

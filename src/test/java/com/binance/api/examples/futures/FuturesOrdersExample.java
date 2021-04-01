@@ -21,7 +21,7 @@ public class FuturesOrdersExample {
 
     public static void main(String[] args) {
         BinanceFuturesApiClientFactory futuresApiClientFactory = BinanceAbstractFactory.createFuturesFactory("YOUR_API_KEY", "YOUR_SECRET");
-        BinanceApiFuturesRestClient client = futuresApiClientFactory.newRestClient();
+        BinanceApiFuturesRestClient client = futuresApiClientFactory.newFuturesRestClient();
 
         FuturesNewOrderResponse futuresOrderResponse = client.newOrder(limitLong(SYMBOL, TimeInForce.GTC, WorkingType.CONTRACT_PRICE, "13", "27", false));
         long orderId = futuresOrderResponse.getOrderId();

@@ -14,7 +14,7 @@ public class TestnetAccountExample {
 
     public static void main(String[] args) {
         BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createTestnetFactory(API_KEY, SECRET_KEY);
-        BinanceApiFuturesRestClient client = factory.newRestClient();
+        BinanceApiFuturesRestClient client = factory.newFuturesRestClient();
 
         FuturesAccount account = client.getAccount();
         System.out.println("Available Balance: " + account.getAvailableBalance());

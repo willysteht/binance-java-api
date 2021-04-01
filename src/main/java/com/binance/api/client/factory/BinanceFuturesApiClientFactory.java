@@ -2,9 +2,11 @@ package com.binance.api.client.factory;
 
 import com.binance.api.client.BinanceApiAsyncFuturesRestClient;
 import com.binance.api.client.BinanceApiFuturesRestClient;
+import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.BinanceApiWebSocketClient;
 import com.binance.api.client.impl.BinanceApiAsyncFuturesRestClientImpl;
 import com.binance.api.client.impl.BinanceApiFuturesRestClientImpl;
+import com.binance.api.client.impl.BinanceApiRestClientImpl;
 import com.binance.api.client.impl.BinanceApiWebSocketClientImpl;
 
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.getSharedClient;
@@ -71,8 +73,8 @@ public class BinanceFuturesApiClientFactory implements BinanceFactory {
     /**
      * Creates a new synchronous/blocking Futures REST client.
      */
-    public BinanceApiFuturesRestClient newRestClient() {
-        return new BinanceApiFuturesRestClientImpl(apiKey, secret, apiUrl);
+    public BinanceApiRestClient newRestClient() {
+        return new BinanceApiRestClientImpl(apiKey, secret, apiUrl);
     }
 
     /**
@@ -80,5 +82,12 @@ public class BinanceFuturesApiClientFactory implements BinanceFactory {
      */
     public BinanceApiWebSocketClient newWebSocketClient() {
         return new BinanceApiWebSocketClientImpl(getSharedClient(), websocketUrl);
+    }
+
+    /**
+     * Creates a new synchronous/blocking Futures REST client.
+     */
+    public BinanceApiFuturesRestClient newFuturesRestClient() {
+        return new BinanceApiFuturesRestClientImpl(apiKey, secret, apiUrl);
     }
 }

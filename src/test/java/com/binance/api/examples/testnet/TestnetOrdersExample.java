@@ -23,7 +23,7 @@ public class TestnetOrdersExample {
 
     public static void main(String[] args) {
         BinanceFuturesApiClientFactory futuresApiClientFactory = BinanceAbstractFactory.createTestnetFactory(API_KEY, SECRET_KEY);
-        BinanceApiFuturesRestClient client = futuresApiClientFactory.newRestClient();
+        BinanceApiFuturesRestClient client = futuresApiClientFactory.newFuturesRestClient();
 
         FuturesNewOrderResponse futuresOrderResponse = client.newOrder(limitLong(SYMBOL, TimeInForce.GTC, WorkingType.CONTRACT_PRICE, "13", "200", false));
         long orderId = futuresOrderResponse.getOrderId();

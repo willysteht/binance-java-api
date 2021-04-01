@@ -9,10 +9,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public enum OrderType {
     LIMIT,
     MARKET,
+    STOP,
     STOP_LOSS,
     STOP_LOSS_LIMIT,
     TAKE_PROFIT,
     TAKE_PROFIT_LIMIT,
     LIMIT_MAKER,
-    TRAILING_STOP_MARKET
+    STOP_MARKET,
+    TRAILING_STOP_MARKET,
+    TAKE_PROFIT_MARKET,
 }

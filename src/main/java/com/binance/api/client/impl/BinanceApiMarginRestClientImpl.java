@@ -1,7 +1,6 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiMarginRestClient;
-import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
@@ -12,7 +11,6 @@ import com.binance.api.client.domain.account.request.OrderStatusRequest;
 
 import java.util.List;
 
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
 
 /**
@@ -22,8 +20,8 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
 
     private final BinanceApiService binanceApiService;
 
-    public BinanceApiMarginRestClientImpl(String apiKey, String secret) {
-        binanceApiService = createService(BinanceApiService.class, apiKey, secret, BinanceEngineType.SPOT);
+    public BinanceApiMarginRestClientImpl(String apiKey, String secret, String apiUrl) {
+        binanceApiService = BinanceApiServiceGenerator.createService(BinanceApiService.class, apiKey, secret, apiUrl);
     }
 
     @Override

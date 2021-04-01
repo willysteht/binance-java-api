@@ -1,14 +1,12 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiSwapRestClient;
-import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.SwapRemoveType;
 import com.binance.api.client.domain.account.*;
 
 import java.util.List;
 
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
 
 /**
@@ -18,8 +16,8 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
 
     private final BinanceApiService binanceApiService;
 
-    public BinanceApiSwapRestClientImpl(String apiKey, String secret) {
-        binanceApiService = createService(BinanceApiService.class, apiKey, secret, BinanceEngineType.SPOT);
+    public BinanceApiSwapRestClientImpl(String apiKey, String secret, String apiUrl) {
+        binanceApiService = BinanceApiServiceGenerator.createService(BinanceApiService.class, apiKey, secret, apiUrl);
     }
 
     @Override

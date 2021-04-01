@@ -5,5 +5,6 @@ package com.binance.api.client;
  */
 public enum BinanceEngineType {
     SPOT,
-    FUTURES
+    FUTURES,
+    TESTNET
 }

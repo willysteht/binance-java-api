@@ -2,7 +2,6 @@ package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiAsyncMarginRestClient;
 import com.binance.api.client.BinanceApiCallback;
-import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
@@ -14,7 +13,6 @@ import com.binance.api.client.domain.event.ListenKey;
 
 import java.util.List;
 
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
 
 /**
  * Implementation of Binance's Margin REST API using Retrofit with asynchronous/non-blocking method calls.
@@ -23,8 +21,8 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
 
     private final BinanceApiService binanceApiService;
 
-    public BinanceApiAsyncMarginRestClientImpl(String apiKey, String secret) {
-        binanceApiService = createService(BinanceApiService.class, apiKey, secret, BinanceEngineType.SPOT);
+    public BinanceApiAsyncMarginRestClientImpl(String apiKey, String secret, String apiUrl) {
+        binanceApiService = BinanceApiServiceGenerator.createService(BinanceApiService.class, apiKey, secret, apiUrl);
     }
 
     // Margin Account endpoints

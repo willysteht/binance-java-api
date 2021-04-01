@@ -1,7 +1,6 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiFuturesRestClient;
-import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.FuturesAccount;
 import com.binance.api.client.domain.account.FuturesNewOrder;
@@ -14,7 +13,6 @@ import com.binance.api.client.domain.account.request.OrderStatusRequest;
 
 import java.util.List;
 
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
 
 /**
@@ -24,8 +22,8 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
 
     private final BinanceFuturesApiService binanceApiService;
 
-    public BinanceApiFuturesRestClientImpl(String apiKey, String secret) {
-        binanceApiService = createService(BinanceFuturesApiService.class, apiKey, secret, BinanceEngineType.FUTURES);
+    public BinanceApiFuturesRestClientImpl(String apiKey, String secret, String apiUrl) {
+        binanceApiService = BinanceApiServiceGenerator.createService(BinanceFuturesApiService.class, apiKey, secret, apiUrl);
     }
 
     @Override

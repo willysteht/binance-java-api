@@ -1,4 +1,4 @@
-package com.binance.api.client;
+package com.binance.api.client.api;
 
 import com.binance.api.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;

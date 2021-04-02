@@ -1,12 +1,12 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiAsyncMarginRestClient;
+import com.binance.api.client.api.async.BinanceApiAsyncMarginRestClient;
 import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.factory.BinanceAbstractFactory;
-import com.binance.api.client.factory.BinanceSpotApiClientFactory;
+import com.binance.api.client.factory.BinanceMarginApiClientFactory;
 
 import static com.binance.api.client.domain.account.MarginNewOrder.limitBuy;
 
@@ -16,8 +16,8 @@ import static com.binance.api.client.domain.account.MarginNewOrder.limitBuy;
 public class MarginOrdersExampleAsync {
 
     public static void main(String[] args) {
-        BinanceSpotApiClientFactory factory = BinanceAbstractFactory.createSpotFactory("YOUR_API_KEY", "YOUR_SECRET");
-        BinanceApiAsyncMarginRestClient client = factory.newAsyncMarginRestClient();
+        BinanceMarginApiClientFactory factory = BinanceAbstractFactory.createMarginFactory("YOUR_API_KEY", "YOUR_SECRET");
+        BinanceApiAsyncMarginRestClient client = factory.newAsyncRestClient();
 
         // Getting list of open orders
         client.getOpenOrders(new OrderRequest("LINKETH"), System.out::println);

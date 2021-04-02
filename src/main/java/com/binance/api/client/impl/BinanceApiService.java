@@ -8,7 +8,6 @@ import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.event.ListenKey;
-import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
 import com.binance.api.client.domain.market.*;
@@ -33,11 +32,7 @@ public interface BinanceApiService {
     @GET("/api/v3/exchangeInfo")
     Call<ExchangeInfo> getExchangeInfo();
 
-    @GET
-    Call<List<Asset>> getAllAssets(@Url String url);
-
     // Market data endpoints
-
     @GET("/api/v1/depth")
     Call<OrderBook> getOrderBook(@Query("symbol") String symbol, @Query("limit") Integer limit);
 

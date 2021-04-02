@@ -1,7 +1,7 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.event.AccountUpdateEvent;
 import com.binance.api.client.domain.event.OrderTradeUpdateEvent;
 import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType;
@@ -20,7 +20,7 @@ public class MarginUserDataStreamExample {
 
     public static void main(String[] args) {
         BinanceSpotApiClientFactory factory = BinanceAbstractFactory.createSpotFactory(API_KEY, SECRET_KEY);
-        BinanceApiRestClient client = factory.newRestClient();
+        BinanceApiSpotRestClient client = factory.newRestClient();
 
         // First, we obtain a listenKey which is required to interact with the user data stream
         String listenKey = client.startUserDataStream();

@@ -1,7 +1,7 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.impl.async;
 
-import com.binance.api.client.BinanceApiAsyncMarginRestClient;
-import com.binance.api.client.BinanceApiCallback;
+import com.binance.api.client.api.async.BinanceApiAsyncMarginRestClient;
+import com.binance.api.client.api.BinanceApiCallback;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
@@ -10,6 +10,9 @@ import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.event.ListenKey;
+import com.binance.api.client.impl.BinanceApiCallbackAdapter;
+import com.binance.api.client.impl.BinanceApiService;
+import com.binance.api.client.impl.BinanceApiServiceGenerator;
 
 import java.util.List;
 
@@ -63,11 +66,6 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
         binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(),
                 orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
                 orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
-    }
-
-    @Override
-    public void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback) {
-        binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()).enqueue(new BinanceApiCallbackAdapter<>(callback));
     }
 
     // user stream endpoints

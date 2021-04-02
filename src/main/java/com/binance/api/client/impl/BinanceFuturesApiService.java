@@ -33,9 +33,6 @@ public interface BinanceFuturesApiService {
     @GET("/fapi/v1/exchangeInfo")
     Call<ExchangeInfo> getExchangeInfo();
 
-    @GET
-    Call<List<Asset>> getAllAssets(@Url String url);
-
     // Market data endpoints
 
     @GET("/fapi/v1/depth")

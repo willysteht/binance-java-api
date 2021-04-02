@@ -1,5 +1,6 @@
-package com.binance.api.client;
+package com.binance.api.client.api.async;
 
+import com.binance.api.client.api.BinanceApiCallback;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;

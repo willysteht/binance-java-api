@@ -1,7 +1,7 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.impl.async;
 
-import com.binance.api.client.BinanceApiAsyncFuturesRestClient;
-import com.binance.api.client.BinanceApiCallback;
+import com.binance.api.client.api.async.BinanceApiAsyncFuturesRestClient;
+import com.binance.api.client.api.BinanceApiCallback;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.FuturesAccount;
 import com.binance.api.client.domain.account.FuturesNewOrder;
@@ -11,6 +11,9 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.impl.BinanceApiCallbackAdapter;
+import com.binance.api.client.impl.BinanceApiServiceGenerator;
+import com.binance.api.client.impl.BinanceFuturesApiService;
 
 import java.util.List;
 

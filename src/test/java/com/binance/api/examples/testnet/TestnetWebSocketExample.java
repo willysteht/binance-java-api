@@ -1,6 +1,6 @@
 package com.binance.api.examples.testnet;
 
-import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.market.CandlestickInterval;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;

@@ -1,4 +1,4 @@
-package com.binance.api.client;
+package com.binance.api.client.api;
 
 import com.binance.api.client.domain.event.*;
 import com.binance.api.client.domain.market.CandlestickInterval;

@@ -1,7 +1,7 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.AssetBalance;
 import com.binance.api.client.factory.BinanceAbstractFactory;
@@ -42,7 +42,7 @@ public class AccountBalanceCacheExample {
      * @return a listenKey that can be used with the user data streaming API.
      */
     private String initializeAssetBalanceCacheAndStreamSession() {
-        BinanceApiRestClient client = clientFactory.newRestClient();
+        BinanceApiSpotRestClient client = clientFactory.newRestClient();
         Account account = client.getAccount();
 
         this.accountBalanceCache = new TreeMap<>();

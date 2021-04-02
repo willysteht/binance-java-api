@@ -1,6 +1,6 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiAsyncRestClient;
+import com.binance.api.client.api.async.BinanceApiSpotAsyncRestClient;
 import com.binance.api.client.domain.market.CandlestickInterval;
 import com.binance.api.client.domain.market.OrderBook;
 import com.binance.api.client.exception.BinanceApiException;
@@ -13,7 +13,7 @@ public class MarketDataEndpointsExampleAsync {
 
     public static void main(String[] args) {
         BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance();
-        BinanceApiAsyncRestClient client = factory.newAsyncRestClient();
+        BinanceApiSpotAsyncRestClient client = factory.newAsyncRestClient();
 
         // Getting depth of a symbol (async)
         client.getOrderBook("NEOETH", 10, (OrderBook response) -> {

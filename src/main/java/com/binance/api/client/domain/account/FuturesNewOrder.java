@@ -129,6 +129,19 @@ public class FuturesNewOrder {
         this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
     }
 
+    public FuturesNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String price, boolean reduceOnly) {
+        this.symbol = symbol;
+        this.side = side;
+        this.type = type;
+        this.timeInForce = timeInForce;
+        this.quantity = quantity;
+        this.price = price;
+        this.reduceOnly = reduceOnly;
+        this.newOrderRespType = NewOrderResponseType.RESULT;
+        this.timestamp = System.currentTimeMillis();
+        this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
+    }
+
     public String getSymbol() {
         return symbol;
     }
@@ -273,12 +286,12 @@ public class FuturesNewOrder {
         this.timestamp = timestamp;
     }
 
-    public static FuturesNewOrder limitLong(String symbol, TimeInForce timeInForce, WorkingType workingType, String quantity, String price, boolean reduceOnly) {
-        return new FuturesNewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, workingType, quantity, price, reduceOnly);
+    public static FuturesNewOrder limitLong(String symbol, TimeInForce timeInForce, String quantity, String price, boolean reduceOnly) {
+        return new FuturesNewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, price, reduceOnly);
     }
 
-    public static FuturesNewOrder limitShort(String symbol, TimeInForce timeInForce, WorkingType workingType, String quantity, String price, boolean reduceOnly) {
-        return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, workingType, quantity, price, reduceOnly);
+    public static FuturesNewOrder limitShort(String symbol, TimeInForce timeInForce, String quantity, String price, boolean reduceOnly) {
+        return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price, reduceOnly);
     }
 
     public static FuturesNewOrder MarketLong(String symbol, String quantity, boolean reduceOnly) {
@@ -287,6 +300,12 @@ public class FuturesNewOrder {
 
     public static FuturesNewOrder MarketShort(String symbol, String quantity, boolean reduceOnly) {
         return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.MARKET, quantity, reduceOnly);
+    }
+
+    public static FuturesNewOrder stopLimitShort(String symbol, String quantity, String stopPrice, boolean reduceOnly) {
+        FuturesNewOrder order = new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.STOP_MARKET, quantity, reduceOnly);
+        order.setStopPrice(stopPrice);
+        return order;
     }
 
    /* public static FuturesNewOrder stopLimitLong(String symbol, String quantity, boolean reduceOnly) {

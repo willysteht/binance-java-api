@@ -1,6 +1,6 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.impl.sync;
 
-import com.binance.api.client.BinanceApiMarginRestClient;
+import com.binance.api.client.api.sync.BinanceApiMarginRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
@@ -8,6 +8,8 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.impl.BinanceApiService;
+import com.binance.api.client.impl.BinanceApiServiceGenerator;
 
 import java.util.List;
 
@@ -55,11 +57,6 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
         return executeSync(binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(),
                 orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
                 orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()));
-    }
-
-    @Override
-    public List<Trade> getMyTrades(String symbol) {
-        return executeSync(binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
     @Override

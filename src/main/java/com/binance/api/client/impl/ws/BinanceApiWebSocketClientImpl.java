@@ -1,7 +1,7 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.impl.ws;
 
-import com.binance.api.client.BinanceApiCallback;
-import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.api.BinanceApiCallback;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.event.*;
 import com.binance.api.client.domain.market.CandlestickInterval;
 import com.fasterxml.jackson.core.type.TypeReference;

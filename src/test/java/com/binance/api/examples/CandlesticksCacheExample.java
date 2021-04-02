@@ -1,7 +1,7 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.market.Candlestick;
 import com.binance.api.client.domain.market.CandlestickInterval;
 import com.binance.api.client.factory.BinanceSpotApiClientFactory;
@@ -30,7 +30,7 @@ public class CandlesticksCacheExample {
      */
     private void initializeCandlestickCache(String symbol, CandlestickInterval interval) {
         BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance();
-        BinanceApiRestClient client = factory.newRestClient();
+        BinanceApiSpotRestClient client = factory.newRestClient();
         List<Candlestick> candlestickBars = client.getCandlestickBars(symbol.toUpperCase(), interval);
 
         this.candlesticksCache = new TreeMap<>();

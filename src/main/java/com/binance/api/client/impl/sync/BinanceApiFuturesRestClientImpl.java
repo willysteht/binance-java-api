@@ -1,15 +1,13 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.impl.sync;
 
-import com.binance.api.client.BinanceApiFuturesRestClient;
+import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
-import com.binance.api.client.domain.account.FuturesAccount;
-import com.binance.api.client.domain.account.FuturesNewOrder;
-import com.binance.api.client.domain.account.FuturesNewOrderResponse;
-import com.binance.api.client.domain.account.Order;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
-import com.binance.api.client.domain.account.request.OrderRequest;
-import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.account.request.*;
+import com.binance.api.client.domain.general.ExchangeInfo;
+import com.binance.api.client.domain.market.*;
+import com.binance.api.client.impl.BinanceApiServiceGenerator;
+import com.binance.api.client.impl.BinanceFuturesApiService;
 
 import java.util.List;
 
@@ -24,6 +22,21 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
 
     public BinanceApiFuturesRestClientImpl(String apiKey, String secret, String apiUrl) {
         binanceApiService = BinanceApiServiceGenerator.createService(BinanceFuturesApiService.class, apiKey, secret, apiUrl);
+    }
+
+    @Override
+    public void ping() {
+        executeSync(binanceApiService.ping());
+    }
+
+    @Override
+    public Long getServerTime() {
+        return executeSync(binanceApiService.getServerTime()).getServerTime();
+    }
+
+    @Override
+    public ExchangeInfo getExchangeInfo() {
+        return executeSync(binanceApiService.getExchangeInfo());
     }
 
     @Override
@@ -73,5 +86,55 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
     @Override
     public void closeUserDataStream(String listenKey) {
         executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
+    }
+
+    @Override
+    public OrderBook getOrderBook(String symbol, Integer limit) {
+        return executeSync(binanceApiService.getOrderBook(symbol, limit));
+    }
+
+    @Override
+    public List<TradeHistoryItem> getTrades(String symbol, Integer limit) {
+        return executeSync(binanceApiService.getTrades(symbol, limit));
+    }
+
+    @Override
+    public List<TradeHistoryItem> getHistoricalTrades(String symbol, Integer limit, Long fromId) {
+        return executeSync(binanceApiService.getHistoricalTrades(symbol, limit, fromId));
+    }
+
+    @Override
+    public List<AggTrade> getAggTrades(String symbol, String fromId, Integer limit, Long startTime, Long endTime) {
+        return executeSync(binanceApiService.getAggTrades(symbol, fromId, limit, startTime, endTime));
+    }
+
+    @Override
+    public List<AggTrade> getAggTrades(String symbol) {
+        return executeSync(binanceApiService.getAggTrades(symbol, null, null, null, null));
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit, Long startTime, Long endTime) {
+        return executeSync(binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(), limit, startTime, endTime));
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval) {
+        return getCandlestickBars(symbol, interval, null, null, null);
+    }
+
+    @Override
+    public TickerStatistics get24HrPriceStatistics(String symbol) {
+        return executeSync(binanceApiService.get24HrPriceStatistics(symbol));
+    }
+
+    @Override
+    public List<TickerStatistics> getAll24HrPriceStatistics() {
+        return executeSync(binanceApiService.getAll24HrPriceStatistics());
+    }
+
+    @Override
+    public TickerPrice getPrice(String symbol) {
+        return executeSync(binanceApiService.getLatestPrice(symbol));
     }
 }

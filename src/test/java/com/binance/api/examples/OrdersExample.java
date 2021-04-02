@@ -1,6 +1,6 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.NewOrderResponseType;
@@ -24,7 +24,7 @@ public class OrdersExample {
 
     public static void main(String[] args) {
         BinanceSpotApiClientFactory factory = BinanceAbstractFactory.createSpotFactory("MWzDJFwWf4jaCkqEv6NFYZyv2fDhdY3c1FMNN0E639wAlKvvD6oH2QxMlg5Be8jP", "ioIv2eCzPCtKeD6DcN5YYHiOA2X6Wn5Ao5kPbQ184wPZkn9Z7bv2F1apafh2f3Mm");
-        BinanceApiRestClient client = factory.newRestClient();
+        BinanceApiSpotRestClient client = factory.newRestClient();
 
         // Getting list of open orders
         List<Order> openOrders = client.getOpenOrders(new OrderRequest(SYMBOL));

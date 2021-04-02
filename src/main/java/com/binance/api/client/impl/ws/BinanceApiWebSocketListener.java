@@ -1,6 +1,6 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.impl.ws;
 
-import com.binance.api.client.BinanceApiCallback;
+import com.binance.api.client.api.BinanceApiCallback;
 import com.binance.api.client.exception.BinanceApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

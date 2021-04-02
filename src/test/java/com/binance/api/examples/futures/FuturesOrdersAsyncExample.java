@@ -1,6 +1,6 @@
 package com.binance.api.examples.futures;
 
-import com.binance.api.client.BinanceApiAsyncFuturesRestClient;
+import com.binance.api.client.api.async.BinanceApiAsyncFuturesRestClient;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;

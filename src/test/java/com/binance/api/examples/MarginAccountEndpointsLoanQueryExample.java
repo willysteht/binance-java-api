@@ -1,11 +1,11 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiMarginRestClient;
+import com.binance.api.client.api.sync.BinanceApiMarginRestClient;
 import com.binance.api.client.domain.account.MarginTransaction;
 import com.binance.api.client.domain.account.MaxBorrowableQueryResult;
 import com.binance.api.client.domain.account.RepayQueryResult;
 import com.binance.api.client.factory.BinanceAbstractFactory;
-import com.binance.api.client.factory.BinanceSpotApiClientFactory;
+import com.binance.api.client.factory.BinanceMarginApiClientFactory;
 
 /**
  * Examples on how to get margin account information.
@@ -13,8 +13,8 @@ import com.binance.api.client.factory.BinanceSpotApiClientFactory;
 public class MarginAccountEndpointsLoanQueryExample {
 
     public static void main(String[] args) {
-        BinanceSpotApiClientFactory factory = BinanceAbstractFactory.createSpotFactory("YOUR_API_KEY", "YOUR_SECRET");
-        BinanceApiMarginRestClient client = factory.newMarginRestClient();
+        BinanceMarginApiClientFactory factory = BinanceAbstractFactory.createMarginFactory("YOUR_API_KEY", "YOUR_SECRET");
+        BinanceApiMarginRestClient client = factory.newRestClient();
         MaxBorrowableQueryResult usdt = client.queryMaxBorrowable("USDT");
         System.out.println(usdt.getAmount());
         MaxBorrowableQueryResult bnb = client.queryMaxBorrowable("BNB");

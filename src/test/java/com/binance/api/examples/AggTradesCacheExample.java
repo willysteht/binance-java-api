@@ -1,7 +1,7 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.market.AggTrade;
 import com.binance.api.client.factory.BinanceSpotApiClientFactory;
 
@@ -30,7 +30,7 @@ public class AggTradesCacheExample {
      */
     private void initializeAggTradesCache(String symbol) {
         BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance();
-        BinanceApiRestClient client = factory.newRestClient();
+        BinanceApiSpotRestClient client = factory.newRestClient();
         List<AggTrade> aggTrades = client.getAggTrades(symbol.toUpperCase());
 
         this.aggTradesCache = new HashMap<>();

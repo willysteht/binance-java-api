@@ -1,6 +1,6 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.FilterType;
 import com.binance.api.client.domain.general.SymbolFilter;
@@ -14,7 +14,7 @@ public class GeneralEndpointsExample {
 
     public static void main(String[] args) {
         BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance();
-        BinanceApiRestClient client = factory.newRestClient();
+        BinanceApiSpotRestClient client = factory.newRestClient();
 
         // Test connectivity
         client.ping();

@@ -1,4 +1,4 @@
-package com.binance.api.client;
+package com.binance.api.client.api;
 
 /**
  * BinanceApiCallback is a functional interface used together with the BinanceApiAsyncClient to provide a non-blocking REST client.

@@ -1,5 +1,6 @@
-package com.binance.api.client;
+package com.binance.api.client.api.async;
 
+import com.binance.api.client.api.BinanceApiCallback;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
 import com.binance.api.client.domain.event.ListenKey;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Binance API facade, supporting asynchronous/non-blocking access Binance's REST API.
  */
-public interface BinanceApiAsyncRestClient {
+public interface BinanceApiSpotAsyncRestClient {
 
     // General endpoints
 

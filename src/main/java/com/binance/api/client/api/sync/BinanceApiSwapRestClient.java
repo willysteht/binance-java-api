@@ -1,4 +1,4 @@
-package com.binance.api.client;
+package com.binance.api.client.api.sync;
 
 import com.binance.api.client.domain.SwapRemoveType;
 import com.binance.api.client.domain.account.*;

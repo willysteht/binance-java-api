@@ -1,6 +1,6 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.BinanceApiAsyncRestClient;
+import com.binance.api.client.api.async.BinanceApiSpotAsyncRestClient;
 import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
@@ -19,7 +19,7 @@ public class OrdersExampleAsync {
 
     public static void main(String[] args) {
         BinanceSpotApiClientFactory factory = BinanceAbstractFactory.createSpotFactory("YOUR_API_KEY", "YOUR_SECRET");
-        BinanceApiAsyncRestClient client = factory.newAsyncRestClient();
+        BinanceApiSpotAsyncRestClient client = factory.newAsyncRestClient();
 
         // Getting list of open orders
         client.getOpenOrders(new OrderRequest("LINKETH"), System.out::println);

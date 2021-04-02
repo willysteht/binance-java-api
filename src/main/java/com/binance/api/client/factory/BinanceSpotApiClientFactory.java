@@ -1,14 +1,18 @@
 package com.binance.api.client.factory;
 
-import com.binance.api.client.*;
-import com.binance.api.client.impl.*;
+import com.binance.api.client.api.BinanceApiWebSocketClient;
+import com.binance.api.client.api.async.BinanceApiSpotAsyncRestClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.impl.async.BinanceApiSpotAsyncRestClientImpl;
+import com.binance.api.client.impl.sync.BinanceApiSpotRestClientImpl;
+import com.binance.api.client.impl.ws.BinanceApiWebSocketClientImpl;
 
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.getSharedClient;
 
 /**
  * A factory for creating BinanceApi client objects.
  */
-public class BinanceSpotApiClientFactory implements BinanceFactory {
+public class BinanceSpotApiClientFactory implements BinanceFactory<BinanceApiSpotRestClient, BinanceApiSpotAsyncRestClient> {
 
     /**
      * API Key
@@ -52,9 +56,7 @@ public class BinanceSpotApiClientFactory implements BinanceFactory {
      *
      * @return the binance api client factory
      * @see BinanceAbstractFactory
-     * @deprecated please use BinanceAbstractFactory.createSpotFactory()
      */
-    @Deprecated
     public static BinanceSpotApiClientFactory newInstance() {
         return new BinanceSpotApiClientFactory(null, null, null, null);
     }
@@ -62,29 +64,15 @@ public class BinanceSpotApiClientFactory implements BinanceFactory {
     /**
      * Creates a new synchronous/blocking REST client.
      */
-    public BinanceApiRestClient newRestClient() {
-        return new BinanceApiRestClientImpl(apiKey, secret, apiUrl);
+    public BinanceApiSpotRestClient newRestClient() {
+        return new BinanceApiSpotRestClientImpl(apiKey, secret, apiUrl);
     }
 
     /**
      * Creates a new asynchronous/non-blocking REST client.
      */
-    public BinanceApiAsyncRestClient newAsyncRestClient() {
-        return new BinanceApiAsyncRestClientImpl(apiKey, secret, apiUrl);
-    }
-
-    /**
-     * Creates a new asynchronous/non-blocking Margin REST client.
-     */
-    public BinanceApiAsyncMarginRestClient newAsyncMarginRestClient() {
-        return new BinanceApiAsyncMarginRestClientImpl(apiKey, secret, apiUrl);
-    }
-
-    /**
-     * Creates a new synchronous/blocking Margin REST client.
-     */
-    public BinanceApiMarginRestClient newMarginRestClient() {
-        return new BinanceApiMarginRestClientImpl(apiKey, secret, apiUrl);
+    public BinanceApiSpotAsyncRestClient newAsyncRestClient() {
+        return new BinanceApiSpotAsyncRestClientImpl(apiKey, secret, apiUrl);
     }
 
     /**
@@ -92,12 +80,5 @@ public class BinanceSpotApiClientFactory implements BinanceFactory {
      */
     public BinanceApiWebSocketClient newWebSocketClient() {
         return new BinanceApiWebSocketClientImpl(getSharedClient(), websocketUrl);
-    }
-
-    /**
-     * Creates a new synchronous/blocking Swap REST client.
-     */
-    public BinanceApiSwapRestClient newSwapRestClient() {
-        return new BinanceApiSwapRestClientImpl(apiKey, secret, apiUrl);
     }
 }

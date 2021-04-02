@@ -13,7 +13,7 @@ import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.impl.BinanceApiCallbackAdapter;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
-import com.binance.api.client.impl.BinanceFuturesApiService;
+import com.binance.api.client.api.BinanceFuturesApiService;
 
 import java.util.List;
 

@@ -1,13 +1,16 @@
 package com.binance.api.client.impl.sync;
 
+import com.binance.api.client.api.BinanceFuturesApiService;
 import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.*;
+import com.binance.api.client.domain.account.request.CancelOrderRequest;
+import com.binance.api.client.domain.account.request.CancelOrderResponse;
+import com.binance.api.client.domain.account.request.OrderRequest;
+import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
-import com.binance.api.client.impl.BinanceFuturesApiService;
 
 import java.util.List;
 
@@ -57,6 +60,22 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
                 order.getType(), order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(),
                 order.getStopPrice(), order.isClosePosition(), order.getActivationPrice(), order.getWorkingType(),
                 order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()));
+    }
+
+    @Override
+    public LeverageResponse changeInitialLeverage(LeverageRequest leverageRequest) {
+        return executeSync(binanceApiService.changeInitialLeverage(leverageRequest.getSymbol(),
+                leverageRequest.getLeverage(),
+                leverageRequest.getRecvWindow(),
+                leverageRequest.getTimestamp()));
+    }
+
+    @Override
+    public void changeMarginType(MarginTypeRequest marginTypeRequest) {
+        executeSync(binanceApiService.changeMarginType(marginTypeRequest.getSymbol(),
+                marginTypeRequest.getMarginType(),
+                marginTypeRequest.getRecvWindow(),
+                marginTypeRequest.getTimestamp()));
     }
 
     @Override

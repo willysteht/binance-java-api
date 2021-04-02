@@ -10,7 +10,7 @@ import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
 import com.binance.api.client.domain.market.*;
 import com.binance.api.client.impl.BinanceApiCallbackAdapter;
-import com.binance.api.client.impl.BinanceApiService;
+import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
 
 import java.util.List;

@@ -1,11 +1,10 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.api;
 
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.*;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.event.ListenKey;
-import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
 import com.binance.api.client.domain.market.*;
@@ -81,18 +80,26 @@ public interface BinanceFuturesApiService {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/fapi/v1/order")
-    Call<CancelOrderResponse> cancelOrder(@Query("symbol") String symbol, @Query("orderId") Long orderId,
-                                          @Query("origClientOrderId") String origClientOrderId, @Query("newClientOrderId") String newClientOrderId,
-                                          @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+    Call<CancelOrderResponse> cancelOrder(@Query("symbol") String symbol,
+                                          @Query("orderId") Long orderId,
+                                          @Query("origClientOrderId") String origClientOrderId,
+                                          @Query("newClientOrderId") String newClientOrderId,
+                                          @Query("recvWindow") Long recvWindow,
+                                          @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/fapi/v1/openOrders")
-    Call<List<Order>> getOpenOrders(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+    Call<List<Order>> getOpenOrders(@Query("symbol") String symbol,
+                                    @Query("recvWindow") Long recvWindow,
+                                    @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/fapi/v1/allOrders")
-    Call<List<Order>> getAllOrders(@Query("symbol") String symbol, @Query("orderId") Long orderId,
-                                   @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+    Call<List<Order>> getAllOrders(@Query("symbol") String symbol,
+                                   @Query("orderId") Long orderId,
+                                   @Query("limit") Integer limit,
+                                   @Query("recvWindow") Long recvWindow,
+                                   @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/fapi/v2/account")
@@ -111,4 +118,18 @@ public interface BinanceFuturesApiService {
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @DELETE("/fapi/v1/listenKey")
     Call<Void> closeAliveUserDataStream(@Query("listenKey") String listenKey);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/fapi/v1/leverage")
+    Call<LeverageResponse> changeInitialLeverage(@Query("symbol") String symbol,
+                                                 @Query("leverage") Integer leverage,
+                                                 @Query("recvWindow") Long recvWindow,
+                                                 @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/fapi/v1/marginType")
+    Call<Void> changeMarginType(@Query("symbol") String symbol,
+                                @Query("marginType") MarginType marginType,
+                                @Query("recvWindow") Long recvWindow,
+                                @Query("timestamp") Long timestamp);
 }

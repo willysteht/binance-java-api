@@ -182,6 +182,13 @@ public class FuturesAccount {
                 .orElse(FuturesAssetBalance.of(symbol));
     }
 
+    public FuturesPosition getPosition(final String symbol) {
+        return positions.stream()
+                .filter(e -> e.getSymbol().equals(symbol))
+                .findFirst()
+                .orElse(null);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)

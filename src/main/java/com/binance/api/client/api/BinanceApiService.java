@@ -1,4 +1,4 @@
-package com.binance.api.client.impl;
+package com.binance.api.client.api;
 
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderSide;

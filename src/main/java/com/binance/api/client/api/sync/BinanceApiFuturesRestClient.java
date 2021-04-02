@@ -1,8 +1,6 @@
 package com.binance.api.client.api.sync;
 
-import com.binance.api.client.domain.account.FuturesAccount;
-import com.binance.api.client.domain.account.FuturesNewOrder;
-import com.binance.api.client.domain.account.FuturesNewOrderResponse;
+import com.binance.api.client.domain.account.*;
 
 public interface BinanceApiFuturesRestClient extends BinanceApiGeneralRestClient {
 
@@ -18,4 +16,16 @@ public interface BinanceApiFuturesRestClient extends BinanceApiGeneralRestClient
      * @return a response containing details about the newly placed order.
      */
     FuturesNewOrderResponse newOrder(FuturesNewOrder order);
+
+
+    /**
+     * Change leverage
+     *
+     * @param leverageRequest
+     * @return LeverageResponse
+     */
+    LeverageResponse changeInitialLeverage(LeverageRequest leverageRequest);
+
+    void changeMarginType(MarginTypeRequest marginTypeRequest);
+
 }

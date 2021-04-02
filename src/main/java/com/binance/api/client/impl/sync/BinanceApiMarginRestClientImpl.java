@@ -8,7 +8,7 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
-import com.binance.api.client.impl.BinanceApiService;
+import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
 
 import java.util.List;

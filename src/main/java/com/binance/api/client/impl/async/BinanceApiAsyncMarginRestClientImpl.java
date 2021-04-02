@@ -11,7 +11,7 @@ import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.impl.BinanceApiCallbackAdapter;
-import com.binance.api.client.impl.BinanceApiService;
+import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
 
 import java.util.List;

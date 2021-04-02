@@ -1,5 +1,6 @@
 package com.binance.api.examples;
 
+import com.binance.api.client.BinanceEngineType;
 import com.binance.api.client.api.sync.BinanceApiSwapRestClient;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.factory.BinanceAbstractFactory;

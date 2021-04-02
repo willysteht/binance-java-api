@@ -1,12 +1,14 @@
 package com.binance.api.client.factory;
 
+import com.binance.api.client.api.async.BinanceApiSwapAsyncRestClient;
 import com.binance.api.client.api.sync.BinanceApiSwapRestClient;
+import com.binance.api.client.impl.async.BinanceApiSwapAsyncRestClientImpl;
 import com.binance.api.client.impl.sync.BinanceApiSwapRestClientImpl;
 
 /**
  * A factory for creating BinanceApi client objects.
  */
-public class BinanceSwapApiClientFactory<T> implements BinanceFactory<BinanceApiSwapRestClient, T> {
+public class BinanceSwapApiClientFactory implements BinanceFactory<BinanceApiSwapRestClient, BinanceApiSwapAsyncRestClient> {
 
     /**
      * API Key
@@ -63,8 +65,7 @@ public class BinanceSwapApiClientFactory<T> implements BinanceFactory<BinanceApi
     /**
      * Creates a new asynchronous/non-blocking REST client.
      */
-    public T newAsyncRestClient() {
-        //FIXME: not implemented yet ...
-        return null;
+    public BinanceApiSwapAsyncRestClient newAsyncRestClient() {
+        return new BinanceApiSwapAsyncRestClientImpl(apiKey, secret, apiUrl);
     }
 }

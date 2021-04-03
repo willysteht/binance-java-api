@@ -16,39 +16,22 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class CandlestickEvent {
 
     private String eventType;
-
     private long eventTime;
-
     private String symbol;
-
-    private Long openTime;
-
+    private long openTime;
     private String open;
-
     private String high;
-
     private String low;
-
     private String close;
-
     private String volume;
-
-    private Long closeTime;
-
+    private long closeTime;
     private CandlestickInterval intervalId;
-
-    private Long firstTradeId;
-
-    private Long lastTradeId;
-
+    private long firstTradeId;
+    private long lastTradeId;
     private String quoteAssetVolume;
-
-    private Long numberOfTrades;
-
+    private long numberOfTrades;
     private String takerBuyBaseAssetVolume;
-
     private String takerBuyQuoteAssetVolume;
-
     private Boolean isBarFinal;
 
     public String getEventType() {
@@ -75,11 +58,11 @@ public class CandlestickEvent {
         this.symbol = symbol;
     }
 
-    public Long getOpenTime() {
+    public long getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Long openTime) {
+    public void setOpenTime(long openTime) {
         this.openTime = openTime;
     }
 
@@ -123,11 +106,11 @@ public class CandlestickEvent {
         this.volume = volume;
     }
 
-    public Long getCloseTime() {
+    public long getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Long closeTime) {
+    public void setCloseTime(long closeTime) {
         this.closeTime = closeTime;
     }
 
@@ -139,19 +122,19 @@ public class CandlestickEvent {
         this.intervalId = intervalId;
     }
 
-    public Long getFirstTradeId() {
+    public long getFirstTradeId() {
         return firstTradeId;
     }
 
-    public void setFirstTradeId(Long firstTradeId) {
+    public void setFirstTradeId(long firstTradeId) {
         this.firstTradeId = firstTradeId;
     }
 
-    public Long getLastTradeId() {
+    public long getLastTradeId() {
         return lastTradeId;
     }
 
-    public void setLastTradeId(Long lastTradeId) {
+    public void setLastTradeId(long lastTradeId) {
         this.lastTradeId = lastTradeId;
     }
 
@@ -163,11 +146,11 @@ public class CandlestickEvent {
         this.quoteAssetVolume = quoteAssetVolume;
     }
 
-    public Long getNumberOfTrades() {
+    public long getNumberOfTrades() {
         return numberOfTrades;
     }
 
-    public void setNumberOfTrades(Long numberOfTrades) {
+    public void setNumberOfTrades(long numberOfTrades) {
         this.numberOfTrades = numberOfTrades;
     }
 

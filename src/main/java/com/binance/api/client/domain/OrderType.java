@@ -17,5 +17,5 @@ public enum OrderType {
     LIMIT_MAKER,
     STOP_MARKET,
     TRAILING_STOP_MARKET,
-    TAKE_PROFIT_MARKET,
+    TAKE_PROFIT_MARKET;
 }

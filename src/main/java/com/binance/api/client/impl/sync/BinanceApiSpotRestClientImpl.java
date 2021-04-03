@@ -226,12 +226,12 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     // user stream endpoints
     @Override
     public String startUserDataStream() {
-        return executeSync(binanceApiService.startMarginUserDataStream()).toString();
+        return executeSync(binanceApiService.startUserDataStream()).toString();
     }
 
     @Override
     public void keepAliveUserDataStream(String listenKey) {
-        executeSync(binanceApiService.keepAliveMarginUserDataStream(listenKey));
+        executeSync(binanceApiService.keepAliveUserDataStream(listenKey));
     }
 
     @Override

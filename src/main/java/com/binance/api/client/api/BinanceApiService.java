@@ -228,6 +228,9 @@ public interface BinanceApiService {
     @PUT("/sapi/v1/userDataStream")
     Call<Void> keepAliveMarginUserDataStream(@Query("listenKey") String listenKey);
 
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @DELETE("/sapi/v1/userDataStream")
+    Call<Void> closeAliveMarginUserDataStream(@Query("listenKey") String listenKey);
     // Binance Liquidity Swap Pool endpoints
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)

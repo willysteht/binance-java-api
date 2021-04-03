@@ -14,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @see UserDataUpdateEvent
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OrderTradeUpdateEvent {
+public class ExecutionReport {
 
   @JsonProperty("e")
   private String eventType;

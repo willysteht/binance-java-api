@@ -1,9 +1,9 @@
 package com.binance.api.examples.futures;
 
-import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
 import com.binance.api.client.api.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
 import com.binance.api.client.domain.event.AccountUpdateEvent;
-import com.binance.api.client.domain.event.OrderTradeUpdateEvent;
+import com.binance.api.client.domain.event.ExecutionReport;
 import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
@@ -35,15 +35,15 @@ public class FuturesUserDataStreamExample {
                 // Print new balances of every available asset
                 System.out.println(accountUpdateEvent.getBalances());
             } else {
-                OrderTradeUpdateEvent orderTradeUpdateEvent = response.getOrderTradeUpdateEvent();
+                ExecutionReport executionReport = response.getExecutionReport();
                 // Print details about an order/trade
-                System.out.println(orderTradeUpdateEvent);
+                System.out.println(executionReport);
 
                 // Print original quantity
-                System.out.println(orderTradeUpdateEvent.getOriginalQuantity());
+                System.out.println(executionReport.getOriginalQuantity());
 
                 // Or price
-                System.out.println(orderTradeUpdateEvent.getPrice());
+                System.out.println(executionReport.getPrice());
             }
         });
         System.out.println("Waiting for events...");

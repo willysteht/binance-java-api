@@ -1,12 +1,12 @@
 package com.binance.api.client.impl.sync;
 
+import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
-import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
 import retrofit2.Call;
 
@@ -80,6 +80,11 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     @Override
     public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval) {
         return getCandlestickBars(symbol, interval, null, null, null);
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit) {
+        return getCandlestickBars(symbol, interval, limit, null, null);
     }
 
     @Override

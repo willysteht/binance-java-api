@@ -1,7 +1,11 @@
 package com.binance.api.client.api.sync;
 
-import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.*;
+import com.binance.api.client.domain.account.Order;
+import com.binance.api.client.domain.account.TradeHistoryItem;
+import com.binance.api.client.domain.account.request.CancelOrderRequest;
+import com.binance.api.client.domain.account.request.CancelOrderResponse;
+import com.binance.api.client.domain.account.request.OrderRequest;
+import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
 
@@ -99,6 +103,13 @@ public interface BinanceApiGeneralRestClient {
      * @see #getCandlestickBars(String, CandlestickInterval, Integer, Long, Long)
      */
     List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval);
+
+    /**
+     * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
+     *
+     * @see #getCandlestickBars(String, CandlestickInterval, Integer, Long, Long)
+     */
+    List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit);
 
     /**
      * Get 24 hour price change statistics.

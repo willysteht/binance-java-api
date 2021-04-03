@@ -1,7 +1,8 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.BinanceUtils;
 import com.binance.api.client.api.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.domain.market.Candlestick;
 import com.binance.api.client.domain.market.CandlestickInterval;
 import com.binance.api.client.factory.BinanceSpotApiClientFactory;
@@ -52,19 +53,10 @@ public class CandlesticksCacheExample {
             if (updateCandlestick == null) {
                 // new candlestick
                 updateCandlestick = new Candlestick();
+            } else {
+                // update candlestick with the stream data
+                updateCandlestick = BinanceUtils.mapToCandlestick(response);
             }
-            // update candlestick with the stream data
-            updateCandlestick.setOpenTime(response.getOpenTime());
-            updateCandlestick.setOpen(response.getOpen());
-            updateCandlestick.setLow(response.getLow());
-            updateCandlestick.setHigh(response.getHigh());
-            updateCandlestick.setClose(response.getClose());
-            updateCandlestick.setCloseTime(response.getCloseTime());
-            updateCandlestick.setVolume(response.getVolume());
-            updateCandlestick.setNumberOfTrades(response.getNumberOfTrades());
-            updateCandlestick.setQuoteAssetVolume(response.getQuoteAssetVolume());
-            updateCandlestick.setTakerBuyQuoteAssetVolume(response.getTakerBuyQuoteAssetVolume());
-            updateCandlestick.setTakerBuyBaseAssetVolume(response.getTakerBuyQuoteAssetVolume());
 
             // Store the updated candlestick in the cache
             candlesticksCache.put(openTime, updateCandlestick);

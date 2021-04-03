@@ -4,9 +4,10 @@ import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
 import com.binance.api.client.domain.event.AccountUpdateEvent;
 import com.binance.api.client.domain.event.ExecutionReport;
-import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
+
+import static com.binance.api.client.domain.event.UserDataUpdateEventType.ACCOUNT_UPDATE;
 
 /**
  * User data stream endpoints examples.
@@ -30,7 +31,7 @@ public class FuturesUserDataStreamExample {
 
         // Listen for changes in the account
         webSocketClient.onUserDataUpdateEvent(listenKey, response -> {
-            if (response.getEventType() == UserDataUpdateEventType.ACCOUNT_UPDATE) {
+            if (response.getEventType() == ACCOUNT_UPDATE) {
                 AccountUpdateEvent accountUpdateEvent = response.getAccountUpdateEvent();
                 // Print new balances of every available asset
                 System.out.println(accountUpdateEvent.getBalances());

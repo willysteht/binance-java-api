@@ -1,7 +1,7 @@
 package com.binance.api.examples;
 
-import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.api.BinanceApiWebSocketClient;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.AssetBalance;
 import com.binance.api.client.factory.BinanceAbstractFactory;
@@ -10,7 +10,7 @@ import com.binance.api.client.factory.BinanceSpotApiClientFactory;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType.ACCOUNT_UPDATE;
+import static com.binance.api.client.domain.event.UserDataUpdateEventType.ACCOUNT_UPDATE;
 
 /**
  * Illustrates how to use the user data event stream to create a local cache for the balance of an account.

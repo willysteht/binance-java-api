@@ -1,6 +1,5 @@
 package com.binance.api.client.domain.event;
 
-import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType;
 import com.binance.api.client.exception.BinanceApiException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;

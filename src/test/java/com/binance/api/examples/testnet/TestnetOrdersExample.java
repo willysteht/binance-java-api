@@ -1,8 +1,6 @@
 package com.binance.api.examples.testnet;
 
 import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
-import com.binance.api.client.domain.account.FuturesNewOrder;
-import com.binance.api.client.domain.account.FuturesNewOrderResponse;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
 
@@ -13,8 +11,8 @@ import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
  */
 public class TestnetOrdersExample {
     private static final String SYMBOL = "BTCUSDT";
-    private static final String API_KEY = "";
-    private static final String SECRET_KEY = "";
+    private static final String API_KEY = "c8be940e7d3ebbfe79842236d6110b88e8350059ca48593a4809bc02794b837b";
+    private static final String SECRET_KEY = "44090bdaf2e1b4d9f46bb772bc630ace9c3a00c3294ab61315f1c0e817ba29d6";
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -50,10 +48,6 @@ public class TestnetOrdersExample {
         // Short Limit Order
 //        FuturesNewOrderResponse shortLimit = futureClient.newOrder(FuturesNewOrder.limitShort(SYMBOL, TimeInForce.GTC, "1.5", "59050", false));
 //        System.out.println(shortLimit);
-
-        FuturesNewOrderResponse stopLimitShort = futureClient.newOrder(FuturesNewOrder.stopLimitShort(SYMBOL, "1", "58814", false));
-        System.out.println(stopLimitShort);
-
     }
 
 }

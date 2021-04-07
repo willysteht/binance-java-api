@@ -301,15 +301,4 @@ public class FuturesNewOrder {
     public static FuturesNewOrder MarketShort(String symbol, String quantity, boolean reduceOnly) {
         return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.MARKET, quantity, reduceOnly);
     }
-
-    public static FuturesNewOrder stopLimitShort(String symbol, String quantity, String stopPrice, boolean reduceOnly) {
-        FuturesNewOrder order = new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.STOP_MARKET, quantity, reduceOnly);
-        order.setStopPrice(stopPrice);
-        return order;
-    }
-
-   /* public static FuturesNewOrder stopLimitLong(String symbol, String quantity, boolean reduceOnly) {
-        return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.MARKET, quantity);
-    }*/
-
 }

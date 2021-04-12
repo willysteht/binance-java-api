@@ -2,16 +2,18 @@ package com.binance.api.client.domain.market;
 
 import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
+import com.binance.api.client.domain.event.CandlestickEventDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 /**
  * Kline/Candlestick bars for a symbol. Klines are uniquely identified by their open time.
  */
 //@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-@JsonPropertyOrder()
+@JsonDeserialize(using = CandleStickDeserializerMarket.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Candlestick {
 

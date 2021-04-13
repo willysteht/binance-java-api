@@ -52,9 +52,20 @@ public interface BinanceApiService {
     Call<List<AggTrade>> getAggTrades(@Query("symbol") String symbol, @Query("fromId") String fromId, @Query("limit") Integer limit,
                                       @Query("startTime") Long startTime, @Query("endTime") Long endTime);
 
-    @GET("/api/v1/klines")
-    Call<List<Candlestick>> getCandlestickBars(@Query("symbol") String symbol, @Query("interval") String interval, @Query("limit") Integer limit,
-                                               @Query("startTime") Long startTime, @Query("endTime") Long endTime);
+    /*
+        Name 	Type 	Mandatory 	Description
+        symbol 	STRING 	YES
+        interval 	ENUM 	YES
+        startTime 	LONG 	NO
+        endTime 	LONG 	NO
+        limit 	INT 	NO 	Default 500; max 1000.
+     */
+    @GET("/api/v3/klines")
+    Call<List<Candlestick>> getCandlestickBars(@Query("symbol") String symbol,
+                                               @Query("interval") String interval,
+                                               @Query("startTime") Long startTime,
+                                               @Query("endTime") Long endTime,
+                                               @Query("limit") Integer limit);
 
     @GET("/api/v1/ticker/24hr")
     Call<TickerStatistics> get24HrPriceStatistics(@Query("symbol") String symbol);

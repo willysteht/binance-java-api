@@ -268,9 +268,9 @@ public interface BinanceApiRestClient {
    *
    * @return withdraw history, containing a list of withdrawals
    */
-  WithdrawHistory getWithdrawHistory(String asset);
+  List<Withdraw> getWithdrawHistory(String asset);
 
-  WithdrawHistory getWithdrawHistory(long startTime, long endTime);
+  List<Withdraw> getWithdrawHistory(long startTime, long endTime);
 
   /**
    * Fetch sub-account transfer history.

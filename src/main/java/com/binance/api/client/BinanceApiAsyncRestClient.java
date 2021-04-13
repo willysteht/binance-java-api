@@ -8,7 +8,7 @@ import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Order;
 import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
-import com.binance.api.client.domain.account.WithdrawHistory;
+import com.binance.api.client.domain.account.Withdraw;
 import com.binance.api.client.domain.account.WithdrawResult;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
@@ -278,7 +278,7 @@ public interface BinanceApiAsyncRestClient {
    *
    * @param callback the callback that handles the response and returns the withdraw history
    */
-  void getWithdrawHistory(String asset, BinanceApiCallback<WithdrawHistory> callback);
+  void getWithdrawHistory(String asset, BinanceApiCallback<List<Withdraw>> callback);
 
   /**
    * Fetch deposit address.

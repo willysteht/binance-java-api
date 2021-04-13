@@ -155,13 +155,27 @@ public interface BinanceApiService {
                                            @Query("recvWindow") Long recvWindow,
                                            @Query("timestamp") Long timestamp);
 
+    /*
+        Name 	Type 	Mandatory 	Description
+        coin 	STRING 	NO
+        status 	INT 	NO 	0(0:Email Sent,1:Cancelled 2:Awaiting Approval 3:Rejected 4:Processing 5:Failure 6:Completed)
+        offset 	INT 	NO
+        limit 	INT 	NO
+        startTime 	LONG 	NO 	Default: 90 days from current timestamp
+        endTime 	LONG 	NO 	Default: present timestamp
+        recvWindow 	LONG 	NO
+        timestamp 	LONG 	YES
+     */
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/withdrawHistory.html")
-    Call<WithdrawHistory> getWithdrawHistory(@Query("asset") String asset, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/withdrawHistory.html")
-    Call<WithdrawHistory> getWithdrawHistory(@Query("startTime") long startTime,@Query("endTime") long endTime, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+    @GET("/sapi/v1/capital/withdraw/history")
+    Call<List<Withdraw>> getWithdrawHistory(@Query("coin") String asset,
+                                             @Query("status") Integer status,
+                                             @Query("startTime") Long startTime,
+                                             @Query("endTime") Long endTime,
+                                             @Query("offset") Integer offset,
+                                             @Query("limit") Integer limit,
+                                             @Query("recvWindow") Long recvWindow,
+                                             @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/wapi/v3/depositAddress.html")

@@ -12,7 +12,7 @@ import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Order;
 import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
-import com.binance.api.client.domain.account.WithdrawHistory;
+import com.binance.api.client.domain.account.Withdraw;
 import com.binance.api.client.domain.account.WithdrawResult;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
@@ -221,8 +221,8 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
   }
 
   @Override
-  public void getWithdrawHistory(String asset, BinanceApiCallback<WithdrawHistory> callback) {
-    binanceApiService.getWithdrawHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+  public void getWithdrawHistory(String asset, BinanceApiCallback<List<Withdraw>> callback) {
+    binanceApiService.getWithdrawHistory(asset,null,null,null,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 

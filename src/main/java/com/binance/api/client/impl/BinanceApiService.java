@@ -133,29 +133,27 @@ public interface BinanceApiService {
                                   @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
 
+    /*
+        Name 	Type 	Mandatory 	Description
+        coin 	STRING 	NO
+        status 	INT 	NO 	0(0:pending,6: credited but cannot withdraw, 1:success)
+        startTime 	LONG 	NO 	Default: 90 days from current timestamp
+        endTime 	LONG 	NO 	Default: present timestamp
+        offset 	INT 	NO 	default:0
+        limit 	INT 	NO
+        recvWindow 	LONG 	NO
+        timestamp 	LONG 	YES
+     */
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/depositHistory.html")
-    Call<DepositHistory> getDepositHistory(@Query("asset") String asset, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/depositHistory.html")
-    Call<DepositHistory> getDepositHistory(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/depositHistory.html")
-    Call<DepositHistory> getDepositHistory(@Query("endTime") Long endTime,@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/depositHistory.html")
-    Call<DepositHistory> getDepositHistory(@Query("startTime") Long startTime,@Query("endTime") Long endTime,@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/depositHistory.html")
-    Call<DepositHistory> getDepositHistory(@Query("asset") String asset,@Query("startTime") Long startTime,@Query("endTime") Long endTime,@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/wapi/v3/depositHistory.html")
-    Call<DepositHistory> getDepositHistory(@Query("asset") String asset,@Query("startTime") Long startTime, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+    @GET("/sapi/v1/capital/deposit/hisrec")
+    Call<List<Deposit>> getDepositHistory(@Query("coin") String asset,
+                                           @Query("status") Integer status,
+                                           @Query("startTime") Long startTime,
+                                           @Query("endTime") Long endTime,
+                                           @Query("offset") Integer offset,
+                                           @Query("limit") Integer limit,
+                                           @Query("recvWindow") Long recvWindow,
+                                           @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/wapi/v3/withdrawHistory.html")

@@ -214,39 +214,40 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
-	public DepositHistory getDepositHistory(String asset) {
-		return executeSync(binanceApiService.getDepositHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+	public List<Deposit> getDepositHistory(String asset,Integer status, Long startTime, Long endTime,Integer offset,Integer limit)
+	{
+		return executeSync(binanceApiService.getDepositHistory(asset,status,startTime,endTime,offset,limit, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				System.currentTimeMillis()));
 	}
 
 	@Override
-	public DepositHistory getDepositHistory(String asset,long startTime) {
-		return executeSync(binanceApiService.getDepositHistory(asset,startTime, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(String asset) {
+		return getDepositHistory(asset,null,null,null,null,null);
 	}
 
 	@Override
-	public DepositHistory getDepositHistory(long endTime) {
-		return executeSync(binanceApiService.getDepositHistory(endTime, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(String asset,long startTime) {
+		return getDepositHistory(asset,null,startTime,null,null,null);
 	}
 
 	@Override
-	public DepositHistory getDepositHistory(long startTime,long endTime) {
-		return executeSync(binanceApiService.getDepositHistory(startTime,endTime, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(long endTime) {
+		return getDepositHistory(null,null,null,endTime,null,null);
 	}
 
 	@Override
-	public DepositHistory getDepositHistory(String asset,long startTime,long endTime) {
-		return executeSync(binanceApiService.getDepositHistory(asset,startTime,endTime, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(long startTime,long endTime) {
+		return getDepositHistory(null,null,startTime,endTime,null,null);
 	}
 
 	@Override
-	public DepositHistory getDepositHistory() {
-		return executeSync(binanceApiService.getDepositHistory(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(String asset,long startTime,long endTime) {
+		return getDepositHistory(asset,null,startTime,endTime,null,null);
+	}
+
+	@Override
+	public List<Deposit> getDepositHistory() {
+		return getDepositHistory(null,null,null,null,null,null);
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package com.binance.api.client;
 
 import com.binance.api.client.domain.account.Account;
+import com.binance.api.client.domain.account.Deposit;
 import com.binance.api.client.domain.account.DepositAddress;
-import com.binance.api.client.domain.account.DepositHistory;
 import com.binance.api.client.domain.account.NewOrder;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Order;
@@ -271,7 +271,7 @@ public interface BinanceApiAsyncRestClient {
    *
    * @param callback the callback that handles the response and returns the deposit history
    */
-  void getDepositHistory(String asset, BinanceApiCallback<DepositHistory> callback);
+  void getDepositHistory(String asset, BinanceApiCallback<List<Deposit>> callback);
 
   /**
    * Fetch account withdraw history.

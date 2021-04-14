@@ -1,6 +1,7 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
@@ -22,9 +23,11 @@ import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync
 public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
 	private final BinanceApiService binanceApiService;
+	private final WalletEndPointImpl walletEndPointImpl;
 
 	public BinanceApiRestClientImpl(String apiKey, String secret) {
 		binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+		this.walletEndPointImpl = new WalletEndPointImpl(binanceApiService);
 	}
 
 	// General endpoints
@@ -213,54 +216,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
-	@Override
-	public List<Deposit> getDepositHistory(String asset,Integer status, Long startTime, Long endTime,Integer offset,Integer limit)
-	{
-		return executeSync(binanceApiService.getDepositHistory(asset,status,startTime,endTime,offset,limit, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
-	}
 
-	@Override
-	public List<Deposit> getDepositHistory(String asset) {
-		return getDepositHistory(asset,null,null,null,null,null);
-	}
-
-	@Override
-	public List<Deposit> getDepositHistory(String asset,long startTime) {
-		return getDepositHistory(asset,null,startTime,null,null,null);
-	}
-
-	@Override
-	public List<Deposit> getDepositHistory(long endTime) {
-		return getDepositHistory(null,null,null,endTime,null,null);
-	}
-
-	@Override
-	public List<Deposit> getDepositHistory(long startTime,long endTime) {
-		return getDepositHistory(null,null,startTime,endTime,null,null);
-	}
-
-	@Override
-	public List<Deposit> getDepositHistory(String asset,long startTime,long endTime) {
-		return getDepositHistory(asset,null,startTime,endTime,null,null);
-	}
-
-	@Override
-	public List<Deposit> getDepositHistory() {
-		return getDepositHistory(null,null,null,null,null,null);
-	}
-
-	@Override
-	public List<Withdraw> getWithdrawHistory(String asset) {
-		return executeSync(binanceApiService.getWithdrawHistory(asset,null,null,null,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
-	}
-
-	@Override
-	public List<Withdraw> getWithdrawHistory(long startTime, long endTime) {
-		return executeSync(binanceApiService.getWithdrawHistory(null,null,startTime,endTime,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
-	}
 
 	@Override
 	public List<SubAccountTransfer> getSubAccountTransfers() {
@@ -288,5 +244,10 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	@Override
 	public void closeUserDataStream(String listenKey) {
 		executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
+	}
+
+	@Override
+	public WalletEndpoint getWalletEndPoint() {
+		return walletEndPointImpl;
 	}
 }

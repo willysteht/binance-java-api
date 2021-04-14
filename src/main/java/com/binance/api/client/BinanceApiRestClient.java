@@ -247,30 +247,7 @@ public interface BinanceApiRestClient {
    */
   WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag);
 
-  /**
-   * Fetch account deposit history.
-   *
-   * @return deposit history, containing a list of deposits
-   */
-  List<Deposit> getDepositHistory(String asset,Integer status, Long startTime, Long endTime,Integer offset,Integer limit);
-  List<Deposit> getDepositHistory(String asset);
 
-  List<Deposit> getDepositHistory(String asset,long startTime);
-
-  List<Deposit> getDepositHistory(long endTime);
-
-  List<Deposit> getDepositHistory(long startTime,long endTime);
-  List<Deposit> getDepositHistory(String asset,long startTime,long endTime);
-  List<Deposit> getDepositHistory();
-
-  /**
-   * Fetch account withdraw history.
-   *
-   * @return withdraw history, containing a list of withdrawals
-   */
-  List<Withdraw> getWithdrawHistory(String asset);
-
-  List<Withdraw> getWithdrawHistory(long startTime, long endTime);
 
   /**
    * Fetch sub-account transfer history.
@@ -308,4 +285,6 @@ public interface BinanceApiRestClient {
    * @param listenKey listen key that identifies a data stream
    */
   void closeUserDataStream(String listenKey);
+
+  WalletEndpoint getWalletEndPoint();
 }

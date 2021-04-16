@@ -132,4 +132,16 @@ public interface BinanceFuturesApiService {
                                 @Query("marginType") MarginType marginType,
                                 @Query("recvWindow") Long recvWindow,
                                 @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/fapi/v1/positionSide/dual")
+    Call<Void> changePositionSideMode(@Query("dualSidePosition") boolean dualSidePosition,
+                                      @Query("recvWindow") Long recvWindow,
+                                      @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/fapi/v2/positionRisk")
+    Call<List<PositionInformation>> getPositionInformation(@Query("symbol") String symbol,
+                                                           @Query("recvWindow") Long recvWindow,
+                                                           @Query("timestamp") Long timestamp);
 }

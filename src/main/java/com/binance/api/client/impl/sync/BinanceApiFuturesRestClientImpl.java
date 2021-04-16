@@ -3,6 +3,7 @@ package com.binance.api.client.impl.sync;
 import com.binance.api.client.api.BinanceFuturesApiService;
 import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
+import com.binance.api.client.domain.PositionSideType;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
@@ -105,6 +106,19 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
     @Override
     public void closeUserDataStream(String listenKey) {
         executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
+    }
+
+    @Override
+    public void changePositionSideMode(PositionSideType positionSideType) {
+        long timestamp = System.currentTimeMillis();
+        boolean positionSide = positionSideType.equals(PositionSideType.HEDGE_MODE);
+        executeSync(binanceApiService.changePositionSideMode(positionSide, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp));
+    }
+
+    @Override
+    public List<PositionInformation> getPositionInformation(String symbol) {
+        long timestamp = System.currentTimeMillis();
+        return executeSync(binanceApiService.getPositionInformation(symbol, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp));
     }
 
     @Override

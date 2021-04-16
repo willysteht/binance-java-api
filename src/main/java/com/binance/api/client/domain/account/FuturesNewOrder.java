@@ -43,7 +43,7 @@ public class FuturesNewOrder {
     /**
      * reduceOnly.
      */
-    private boolean reduceOnly;
+    private Boolean reduceOnly;
 
     /**
      * Price.
@@ -100,6 +100,9 @@ public class FuturesNewOrder {
      */
     private long timestamp;
 
+    public FuturesNewOrder() {
+    }
+
     /**
      * Creates a new order with all required parameters.
      */
@@ -129,14 +132,28 @@ public class FuturesNewOrder {
         this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
     }
 
-    public FuturesNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String price, boolean reduceOnly) {
+    public FuturesNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String price, WorkingType workingType, boolean reduceOnly) {
         this.symbol = symbol;
         this.side = side;
         this.type = type;
         this.timeInForce = timeInForce;
         this.quantity = quantity;
         this.price = price;
+        this.workingType = workingType;
         this.reduceOnly = reduceOnly;
+        this.newOrderRespType = NewOrderResponseType.RESULT;
+        this.timestamp = System.currentTimeMillis();
+        this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
+    }
+
+    public FuturesNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, WorkingType workingType, String quantity, String price) {
+        this.symbol = symbol;
+        this.side = side;
+        this.type = type;
+        this.timeInForce = timeInForce;
+        this.workingType = workingType;
+        this.quantity = quantity;
+        this.price = price;
         this.newOrderRespType = NewOrderResponseType.RESULT;
         this.timestamp = System.currentTimeMillis();
         this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
@@ -190,11 +207,11 @@ public class FuturesNewOrder {
         this.quantity = quantity;
     }
 
-    public boolean isReduceOnly() {
+    public Boolean isReduceOnly() {
         return reduceOnly;
     }
 
-    public void setReduceOnly(boolean reduceOnly) {
+    public void setReduceOnly(Boolean reduceOnly) {
         this.reduceOnly = reduceOnly;
     }
 
@@ -286,12 +303,12 @@ public class FuturesNewOrder {
         this.timestamp = timestamp;
     }
 
-    public static FuturesNewOrder limitLong(String symbol, TimeInForce timeInForce, String quantity, String price, boolean reduceOnly) {
-        return new FuturesNewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, price, reduceOnly);
+    public static FuturesNewOrder limitLong(String symbol, TimeInForce timeInForce, String quantity, String price, WorkingType workingType, boolean reduceOnly) {
+        return new FuturesNewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, price, workingType, reduceOnly);
     }
 
-    public static FuturesNewOrder limitShort(String symbol, TimeInForce timeInForce, String quantity, String price, boolean reduceOnly) {
-        return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price, reduceOnly);
+    public static FuturesNewOrder limitShort(String symbol, TimeInForce timeInForce, String quantity, String price, WorkingType workingType, boolean reduceOnly) {
+        return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price, workingType, reduceOnly);
     }
 
     public static FuturesNewOrder MarketLong(String symbol, String quantity, boolean reduceOnly) {
@@ -301,4 +318,97 @@ public class FuturesNewOrder {
     public static FuturesNewOrder MarketShort(String symbol, String quantity, boolean reduceOnly) {
         return new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.MARKET, quantity, reduceOnly);
     }
+
+    public static FuturesNewOrder stopLimitLong(String symbol, String quantity, String stopPrice, String price, WorkingType workingType, boolean reduceOnly) {
+        FuturesNewOrder futuresNewOrder = new FuturesNewOrder(symbol, OrderSide.BUY, OrderType.STOP, quantity, reduceOnly);
+        futuresNewOrder.setStopPrice(stopPrice);
+        futuresNewOrder.setPrice(price);
+        futuresNewOrder.workingType = workingType;
+        return futuresNewOrder;
+    }
+
+    public static FuturesNewOrder stopLimitShort(String symbol, String quantity, String stopPrice, String price, WorkingType workingType, boolean reduceOnly) {
+        FuturesNewOrder futuresNewOrder = new FuturesNewOrder(symbol, OrderSide.SELL, OrderType.STOP, quantity, reduceOnly);
+        futuresNewOrder.setStopPrice(stopPrice);
+        futuresNewOrder.setPrice(price);
+        futuresNewOrder.workingType = workingType;
+        return futuresNewOrder;
+    }
+
+    public static FuturesNewOrder stopMarket(String symbol, OrderSide orderSide, String stopPrice, WorkingType workingType) {
+        FuturesNewOrder order = new FuturesNewOrder();
+        order.setSymbol(symbol);
+        order.setSide(orderSide);
+        order.setStopPrice(stopPrice);
+        order.setClosePosition(true);
+        order.setWorkingType(workingType);
+        order.setType(OrderType.STOP_MARKET);
+        order.setNewOrderRespType(NewOrderResponseType.RESULT);
+        order.setTimestamp(System.currentTimeMillis());
+        order.setRecvWindow(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW);
+        return order;
+    }
+
+    public static FuturesNewOrder takeProfitMarket(String symbol, OrderSide orderSide, String stopPrice, WorkingType workingType) {
+        FuturesNewOrder order = new FuturesNewOrder();
+        order.setSymbol(symbol);
+        order.setSide(orderSide);
+        order.setStopPrice(stopPrice);
+        order.setClosePosition(true);
+        order.setWorkingType(workingType);
+        order.setType(OrderType.TAKE_PROFIT_MARKET);
+        order.setNewOrderRespType(NewOrderResponseType.RESULT);
+        order.setTimestamp(System.currentTimeMillis());
+        order.setRecvWindow(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW);
+        return order;
+    }
+
+    public static FuturesNewOrder limitHedgeOrder(String symbol, OrderSide orderSide, PositionSide positionSide, TimeInForce timeInForce, String quantity, String price,WorkingType workingType) {
+        FuturesNewOrder order = new FuturesNewOrder();
+        order.setSymbol(symbol);
+        order.setType(OrderType.LIMIT);
+        order.setPositionSide(positionSide);
+        order.setSide(orderSide);
+        order.setTimeInForce(timeInForce);
+        order.setQuantity(quantity);
+        order.setPrice(price);
+        order.setWorkingType(workingType);
+        order.setNewOrderRespType(NewOrderResponseType.RESULT);
+        order.setTimestamp(System.currentTimeMillis());
+        order.setRecvWindow(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW);
+        return order;
+    }
+
+    public static FuturesNewOrder stopLimitHedgeOrder(String symbol, OrderSide orderSide, PositionSide positionSide, TimeInForce timeInForce, String quantity, String stopPrice, String price,WorkingType workingType) {
+        FuturesNewOrder order = new FuturesNewOrder();
+        order.setSymbol(symbol);
+        order.setType(OrderType.STOP);
+        order.setPositionSide(positionSide);
+        order.setSide(orderSide);
+        order.setTimeInForce(timeInForce);
+        order.setQuantity(quantity);
+        order.setStopPrice(stopPrice);
+        order.setPrice(price);
+        order.setWorkingType(workingType);
+        order.setNewOrderRespType(NewOrderResponseType.RESULT);
+        order.setTimestamp(System.currentTimeMillis());
+        order.setRecvWindow(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW);
+        return order;
+    }
+
+    public static FuturesNewOrder stopLoseHedgeOrder(String symbol, OrderSide orderSide, PositionSide positionSide, String stopPrice, WorkingType workingType) {
+        FuturesNewOrder order = new FuturesNewOrder();
+        order.setSymbol(symbol);
+        order.setType(OrderType.STOP_MARKET);
+        order.setPositionSide(positionSide);
+        order.setSide(orderSide);
+        order.setStopPrice(stopPrice);
+        order.setClosePosition(true);
+        order.setWorkingType(workingType);
+        order.setNewOrderRespType(NewOrderResponseType.RESULT);
+        order.setTimestamp(System.currentTimeMillis());
+        order.setRecvWindow(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW);
+        return order;
+    }
+
 }

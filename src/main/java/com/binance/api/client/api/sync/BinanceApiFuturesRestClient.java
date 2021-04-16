@@ -1,6 +1,9 @@
 package com.binance.api.client.api.sync;
 
+import com.binance.api.client.domain.PositionSideType;
 import com.binance.api.client.domain.account.*;
+
+import java.util.List;
 
 public interface BinanceApiFuturesRestClient extends BinanceApiGeneralRestClient {
 
@@ -55,5 +58,14 @@ public interface BinanceApiFuturesRestClient extends BinanceApiGeneralRestClient
      * @param listenKey listen key that identifies a data stream
      */
     void closeUserDataStream(String listenKey);
+
+    /**
+     * Change user's position mode (Hedge mode or One-Way mode)
+     *
+     * @param positionSideType
+     */
+    void changePositionSideMode(PositionSideType positionSideType);
+
+    List<PositionInformation> getPositionInformation(String symbol);
 
 }

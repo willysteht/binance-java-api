@@ -1,19 +1,16 @@
 package com.binance.api.client.impl.async;
 
-import com.binance.api.client.api.async.BinanceApiAsyncFuturesRestClient;
 import com.binance.api.client.api.BinanceApiCallback;
+import com.binance.api.client.api.BinanceFuturesApiService;
+import com.binance.api.client.api.async.BinanceApiAsyncFuturesRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
-import com.binance.api.client.domain.account.FuturesAccount;
-import com.binance.api.client.domain.account.FuturesNewOrder;
-import com.binance.api.client.domain.account.FuturesNewOrderResponse;
-import com.binance.api.client.domain.account.Order;
+import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.impl.BinanceApiCallbackAdapter;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
-import com.binance.api.client.api.BinanceFuturesApiService;
 
 import java.util.List;
 
@@ -70,5 +67,12 @@ public class BinanceApiAsyncFuturesRestClientImpl implements BinanceApiAsyncFutu
         binanceFuturesApiService.getOrderStatus(orderStatusRequest.getSymbol(),
                 orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
                 orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getPositionInformation(String symbol, BinanceApiCallback<List<PositionInformation>> callback) {
+        long timestamp = System.currentTimeMillis();
+        long receivingWindow = BinanceApiConstants.DEFAULT_MARGIN_RECEIVING_WINDOW;
+        binanceFuturesApiService.getPositionInformation(symbol, receivingWindow, timestamp);
     }
 }

@@ -1,8 +1,15 @@
 package com.binance.api.examples.testnet;
 
 import com.binance.api.client.api.sync.BinanceApiFuturesRestClient;
+import com.binance.api.client.constant.BinanceApiConstants;
+import com.binance.api.client.domain.*;
+import com.binance.api.client.domain.account.FuturesNewOrder;
+import com.binance.api.client.domain.general.ExchangeInfo;
+import com.binance.api.client.domain.general.SymbolInfo;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
+
+import java.text.DecimalFormat;
 
 /**
  * Examples on how to place orders, cancel them.
@@ -11,8 +18,8 @@ import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
  */
 public class TestnetOrdersExample {
     private static final String SYMBOL = "BTCUSDT";
-    private static final String API_KEY = "c8be940e7d3ebbfe79842236d6110b88e8350059ca48593a4809bc02794b837b";
-    private static final String SECRET_KEY = "44090bdaf2e1b4d9f46bb772bc630ace9c3a00c3294ab61315f1c0e817ba29d6";
+    private static final String API_KEY = "";
+    private static final String SECRET_KEY = "";
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -48,6 +55,25 @@ public class TestnetOrdersExample {
         // Short Limit Order
 //        FuturesNewOrderResponse shortLimit = futureClient.newOrder(FuturesNewOrder.limitShort(SYMBOL, TimeInForce.GTC, "1.5", "59050", false));
 //        System.out.println(shortLimit);
+
+        ExchangeInfo exchangeInfo = futureClient.getExchangeInfo();
+        SymbolInfo symbolInfo = exchangeInfo.getSymbolInfo(SYMBOL);
+        int pricePrecision = symbolInfo.getPricePrecision();
+        int quantityPrecision = symbolInfo.getQuantityPrecision();
+
+        String formatQuantity = new DecimalFormat(PrecisionFormat.getPrecisionFormat(quantityPrecision)).format(2);
+        String formatPrice = new DecimalFormat(PrecisionFormat.getPrecisionFormat(pricePrecision)).format(58200);
+
+        FuturesNewOrder futuresNewOrder = new FuturesNewOrder();
+        futuresNewOrder.setSymbol(SYMBOL);
+        futuresNewOrder.setSide(OrderSide.BUY);
+        futuresNewOrder.setType(OrderType.STOP_MARKET);
+        futuresNewOrder.setStopPrice("60000");
+        futuresNewOrder.setClosePosition(true);
+        futuresNewOrder.setTimestamp(System.currentTimeMillis());
+        futuresNewOrder.setRecvWindow(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW);
+
+        futureClient.newOrder(futuresNewOrder);
     }
 
 }

@@ -28,4 +28,6 @@ public interface BinanceApiAsyncFuturesRestClient {
 
     void getOrderStatus(OrderStatusRequest orderStatusRequest, BinanceApiCallback<Order> callback);
 
+    void getPositionInformation(String symbol, BinanceApiCallback<List<PositionInformation>> callback);
+
 }

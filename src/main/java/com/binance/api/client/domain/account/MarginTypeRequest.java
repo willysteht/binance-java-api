@@ -3,7 +3,7 @@ package com.binance.api.client.domain.account;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.MarginType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.binance.api.client.ToStringBuilder;
 
 /**
  * @author Mahdi Sheikh Hosseini
@@ -62,7 +62,7 @@ public class MarginTypeRequest {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+        return new ToStringBuilder()
                 .append("symbol", symbol)
                 .append("marginType", marginType)
                 .append("recvWindow", recvWindow)

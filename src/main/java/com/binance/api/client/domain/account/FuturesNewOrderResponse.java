@@ -6,7 +6,7 @@ import com.binance.api.client.domain.OrderStatus;
 import com.binance.api.client.domain.PositionSide;
 import com.binance.api.client.domain.WorkingType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.binance.api.client.ToStringBuilder;
 
 /**
  * Response returned when placing a new order on the system.
@@ -226,7 +226,7 @@ public class FuturesNewOrderResponse {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+        return new ToStringBuilder()
                 .append("clientOrderId", clientOrderId)
                 .append("cumQty", cumQty)
                 .append("cumQuote", cumQuote)

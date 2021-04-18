@@ -4,7 +4,7 @@ import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.binance.api.client.ToStringBuilder;
 
 /**
  * Order or trade report update event.
@@ -400,7 +400,7 @@ public class OrderTradeUpdate {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+        return new ToStringBuilder()
                 .append("eventType", eventType)
                 .append("orderTradeTime", orderTradeTime)
                 .append("eventTime", eventTime)

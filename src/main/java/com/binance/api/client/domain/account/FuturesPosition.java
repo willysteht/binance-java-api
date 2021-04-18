@@ -3,7 +3,7 @@ package com.binance.api.client.domain.account;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.PositionSide;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.binance.api.client.ToStringBuilder;
 
 /**
  * An asset balance in an Account.
@@ -123,7 +123,7 @@ public class FuturesPosition {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+        return new ToStringBuilder()
                 .append("symbol", symbol)
                 .append("initialMargin", initialMargin)
                 .append("maintMargin", maintMargin)

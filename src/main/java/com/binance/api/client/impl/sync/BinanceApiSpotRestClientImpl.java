@@ -1,5 +1,6 @@
 package com.binance.api.client.impl.sync;
 
+import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
@@ -8,6 +9,8 @@ import com.binance.api.client.domain.account.request.*;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
+import com.binance.api.client.impl.WalletEndPointImpl;
+
 import retrofit2.Call;
 
 import java.util.List;
@@ -21,9 +24,11 @@ import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync
 public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
 
     private final BinanceApiService binanceApiService;
+    private final WalletEndPointImpl walletEndPointImpl;
 
     public BinanceApiSpotRestClientImpl(String apiKey, String secret, String apiUrl) {
         binanceApiService = BinanceApiServiceGenerator.createService(BinanceApiService.class, apiKey, secret, apiUrl);
+        walletEndPointImpl = new WalletEndPointImpl(binanceApiService);
     }
 
     // General endpoints
@@ -74,7 +79,7 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit,
                                                 Long startTime, Long endTime) {
         return executeSync(
-                binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(), limit, startTime, endTime));
+                binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(), startTime, endTime,limit));
     }
 
     @Override
@@ -200,20 +205,25 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     }
 
     @Override
+    public List<Trade> getMyTrades(String symbol, Long fromId,int limit) {
+        return getMyTrades(symbol, limit, fromId, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+                System.currentTimeMillis());
+    }
+
+    @Override
     public WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag) {
         return executeSync(binanceApiService.withdraw(asset, address, amount, name, addressTag,
                 BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
     @Override
-    public DepositHistory getDepositHistory(String asset) {
-        return executeSync(binanceApiService.getDepositHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-                System.currentTimeMillis()));
+    public List<Deposit> getDepositHistory(String asset) {
+        return executeSync(binanceApiService.getDepositHistory(asset,null,null,null,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,System.currentTimeMillis()));
     }
 
     @Override
-    public WithdrawHistory getWithdrawHistory(String asset) {
-        return executeSync(binanceApiService.getWithdrawHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+    public List<Withdraw> getWithdrawHistory(String asset) {
+        return executeSync(binanceApiService.getWithdrawHistory(asset,null,null,null,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
                 System.currentTimeMillis()));
     }
 
@@ -242,5 +252,10 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     @Override
     public void closeUserDataStream(String listenKey) {
         executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
+    }
+
+    @Override
+    public WalletEndpoint getWalletEndPoint() {
+        return walletEndPointImpl;
     }
 }

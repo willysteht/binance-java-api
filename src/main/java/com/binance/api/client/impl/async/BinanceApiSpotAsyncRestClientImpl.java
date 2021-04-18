@@ -73,7 +73,7 @@ public class BinanceApiSpotAsyncRestClientImpl implements BinanceApiSpotAsyncRes
 
     @Override
     public void getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit, Long startTime, Long endTime, BinanceApiCallback<List<Candlestick>> callback) {
-        binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(), limit, startTime, endTime).enqueue(new BinanceApiCallbackAdapter<>(callback));
+        binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(),  startTime, endTime,limit).enqueue(new BinanceApiCallbackAdapter<>(callback));
     }
 
     @Override
@@ -190,17 +190,16 @@ public class BinanceApiSpotAsyncRestClientImpl implements BinanceApiSpotAsyncRes
     }
 
     @Override
-    public void getDepositHistory(String asset, BinanceApiCallback<DepositHistory> callback) {
-        binanceApiService.getDepositHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+    public void getDepositHistory(String asset, BinanceApiCallback<List<Deposit>> callback) {
+        binanceApiService.getDepositHistory(asset,null,null,null,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
                 .enqueue(new BinanceApiCallbackAdapter<>(callback));
     }
 
     @Override
-    public void getWithdrawHistory(String asset, BinanceApiCallback<WithdrawHistory> callback) {
-        binanceApiService.getWithdrawHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+    public void getWithdrawHistory(String asset, BinanceApiCallback<List<Withdraw>> callback) {
+        binanceApiService.getWithdrawHistory(asset, null, null, null, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
                 .enqueue(new BinanceApiCallbackAdapter<>(callback));
     }
-
     @Override
     public void getDepositAddress(String asset, BinanceApiCallback<DepositAddress> callback) {
         binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())

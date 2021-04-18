@@ -1,10 +1,10 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.WalletEndpoint;
+import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.Deposit;
 import com.binance.api.client.domain.account.Withdraw;
-import com.binance.api.client.impl.BinanceApiService;
 
 import java.util.List;
 

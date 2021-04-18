@@ -1,5 +1,6 @@
 package com.binance.api.client.api.sync;
 
+import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.market.BookTicker;
@@ -86,6 +87,7 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
     List<Trade> getMyTrades(String symbol);
 
     List<Trade> getMyTrades(String symbol, Long fromId);
+    List<Trade> getMyTrades(String symbol, Long fromId,int limit);
 
     /**
      * Submit a withdraw request.
@@ -105,14 +107,14 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
      *
      * @return deposit history, containing a list of deposits
      */
-    DepositHistory getDepositHistory(String asset);
+    List<Deposit> getDepositHistory(String asset);
 
     /**
      * Fetch account withdraw history.
      *
      * @return withdraw history, containing a list of withdrawals
      */
-    WithdrawHistory getWithdrawHistory(String asset);
+    List<Withdraw> getWithdrawHistory(String asset);
 
     /**
      * Fetch sub-account transfer history.
@@ -149,4 +151,6 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
      * @param listenKey listen key that identifies a data stream
      */
     void closeUserDataStream(String listenKey);
+
+    WalletEndpoint getWalletEndPoint();
 }

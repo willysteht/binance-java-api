@@ -247,14 +247,14 @@ public interface BinanceApiSpotAsyncRestClient {
      *
      * @param callback the callback that handles the response and returns the deposit history
      */
-    void getDepositHistory(String asset, BinanceApiCallback<DepositHistory> callback);
+    void getDepositHistory(String asset, BinanceApiCallback<List<Deposit>> callback);
 
     /**
      * Fetch account withdraw history.
      *
      * @param callback the callback that handles the response and returns the withdraw history
      */
-    void getWithdrawHistory(String asset, BinanceApiCallback<WithdrawHistory> callback);
+    void getWithdrawHistory(String asset, BinanceApiCallback<List<Withdraw>> callback);
 
     /**
      * Fetch deposit address.

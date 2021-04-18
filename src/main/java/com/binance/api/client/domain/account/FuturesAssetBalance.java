@@ -2,7 +2,7 @@ package com.binance.api.client.domain.account;
 
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.binance.api.client.ToStringBuilder;
 
 /**
  * An asset balance in an Account.
@@ -128,7 +128,7 @@ public class FuturesAssetBalance {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+        return new ToStringBuilder()
                 .append("asset", asset)
                 .append("walletBalance", walletBalance)
                 .append("unrealizedProfit", unrealizedProfit)

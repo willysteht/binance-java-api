@@ -1,5 +1,6 @@
 package com.binance.api.client.api;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 
 

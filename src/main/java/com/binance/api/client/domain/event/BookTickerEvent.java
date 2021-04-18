@@ -1,9 +1,10 @@
 package com.binance.api.client.domain.event;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 /**
  * BookTickerEvent event for a symbol. Pushes any update to the best bid or
@@ -104,7 +105,7 @@ public class BookTickerEvent {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("eventType", "BookTicker")
+        return new ToStringBuilder().append("eventType", "BookTicker")
                 .append("updateId", updateId).append("symbol", symbol).append("bidPrice", bidPrice)
                 .append("bidQuantity", bidQuantity).append("askPrice", askPrice).append("askQuantity", askQuantity)
                 .toString();

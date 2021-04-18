@@ -1,8 +1,9 @@
 package com.binance.api.client.domain.market;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 /**
  * 24 hour price change statistics for a ticker.
@@ -233,7 +234,7 @@ public class TickerStatistics {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("symbol", symbol)
         .append("priceChange", priceChange)
         .append("priceChangePercent", priceChangePercent)

@@ -66,6 +66,14 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
         return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, TickerEvent.class));
     }
 
+    @Override
+    public Closeable onMiniTickerEvent(String symbols, BinanceApiCallback<MiniTickerEvent> callback) {
+        final String channel = Arrays.stream(symbols.split(","))
+                .map(String::trim)
+                .map(s -> String.format("%s@miniTicker", s))
+                .collect(Collectors.joining("/"));
+        return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, MiniTickerEvent.class));
+    }
     public Closeable onAllMarketTickersEvent(BinanceApiCallback<List<TickerEvent>> callback) {
         final String channel = "!ticker@arr";
         return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, new TypeReference<List<TickerEvent>>() {
@@ -99,9 +107,9 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
         final WebSocket webSocket = client.newWebSocket(request, listener);
         return () -> {
             final int code = 1000;
-            listener.onClosing(webSocket, code, null);
+            listener.onClosing(webSocket, code, "");
             webSocket.close(code, null);
-            listener.onClosed(webSocket, code, null);
+            listener.onClosed(webSocket, code, "");
         };
     }
 }

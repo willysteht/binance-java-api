@@ -1,7 +1,5 @@
 package com.binance.api.client.security;
 
-import org.apache.commons.codec.binary.Hex;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 

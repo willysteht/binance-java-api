@@ -1,12 +1,13 @@
 package com.binance.api.client.domain.account;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderSide;
 import com.binance.api.client.domain.OrderStatus;
 import com.binance.api.client.domain.OrderType;
 import com.binance.api.client.domain.TimeInForce;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -167,7 +168,7 @@ public class NewOrderResponse {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("symbol", symbol)
         .append("orderId", orderId)
         .append("clientOrderId", clientOrderId)

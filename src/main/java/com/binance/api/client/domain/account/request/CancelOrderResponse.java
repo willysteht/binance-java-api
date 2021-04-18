@@ -1,8 +1,8 @@
 package com.binance.api.client.domain.account.request;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Response object returned when an order is canceled.
@@ -67,7 +67,7 @@ public class CancelOrderResponse {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+    return new ToStringBuilder()
         .append("symbol", symbol)
         .append("origClientOrderId", origClientOrderId)
         .append("orderId", orderId)

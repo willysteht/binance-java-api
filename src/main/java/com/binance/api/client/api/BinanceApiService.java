@@ -347,5 +347,25 @@ public interface BinanceApiService {
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 
-
+    /*
+    Name 	Type 	Mandatory 	Description
+    asset 	STRING 	YES
+    startTime 	LONG 	YES
+    endTime 	LONG 	NO
+    current 	LONG 	NO 	Currently querying page. Start from 1. Default:1
+    size 	LONG 	NO 	Default:10 Max:100
+    recvWindow 	LONG 	NO
+    timestamp 	LONG 	YES
+     */
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/sapi/v1/futures/transfer")
+    Call<FuturesTransactionList> getFutureAccountTransactionHistoryList(
+            @Query("asset") String asset,
+            @Query("startTime") Long startTime,
+            @Query("endTime") Long endTime,
+            @Query("current") Long current,
+            @Query("size") Long size,
+            @Query("recvWindow") Long recvWindow,
+            @Query("timestamp") Long timestamp
+    );
 }

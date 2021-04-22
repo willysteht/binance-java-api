@@ -90,5 +90,19 @@ public interface BinanceApiSwapRestClient {
                     String baseAsset,
                     String quoteQty);
 
-    SwapHistory getSwapHistory(String swapId);
+
+    /*
+    Name 	    Type 	Mandatory 	Description
+    swapId 	    LONG 	NO
+    startTime 	LONG 	NO
+    endTime 	LONG 	NO
+    status 	    INT 	NO 	0: pending for swap, 1: success, 2: failed
+    quoteAsset 	STRING 	NO
+    baseAsset 	STRING 	NO
+    limit 	    LONG 	NO 	default 3, max 100
+    recvWindow 	LONG 	NO
+    timestamp 	LONG 	YES
+     */
+    List<SwapHistory> getSwapHistory(Long swapId, Long startTime, Long endTime, Integer status, String quoteAsset, String baseAsset, Long limit);
+    List<SwapHistory> getSwapHistory();
 }

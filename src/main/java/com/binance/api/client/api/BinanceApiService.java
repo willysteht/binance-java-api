@@ -340,10 +340,29 @@ public interface BinanceApiService {
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 
+
+    /*
+    Name 	    Type 	Mandatory 	Description
+    swapId 	    LONG 	NO
+    startTime 	LONG 	NO
+    endTime 	LONG 	NO
+    status 	    INT 	NO 	0: pending for swap, 1: success, 2: failed
+    quoteAsset 	STRING 	NO
+    baseAsset 	STRING 	NO
+    limit 	    LONG 	NO 	default 3, max 100
+    recvWindow 	LONG 	NO
+    timestamp 	LONG 	YES
+     */
     @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
     @GET("/sapi/v1/bswap/swap")
     Call<List<SwapHistory>> getSwapHistory(
-            @Query("swapId") String swapId,
+            @Query("swapId") Long swapId,
+            @Query("startTime") Long startTime,
+            @Query("endTime") Long endTime,
+            @Query("status") Integer status,
+            @Query("quoteAsset") String quoteAsset,
+            @Query("baseAsset") String baseAsset,
+            @Query("limit") Long limit,
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 

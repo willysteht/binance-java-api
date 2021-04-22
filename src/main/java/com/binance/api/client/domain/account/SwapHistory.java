@@ -1,87 +1,110 @@
 package com.binance.api.client.domain.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/*
+    "swapId": 2314,
+    "swapTime": 1565770342148,
+    "status": 0, // 0: pending, 1: success, 2: failed
+    "quoteAsset": "USDT",
+    "baseAsset": "BUSD",
+    "quoteQty": 300000,
+    "baseQty": 299975,
+    "price": 1.00008334,
+    "fee": 120
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SwapHistory {
-
-    private String quoteQty;
-    private Long swapTime;
+    @JsonProperty("swapId")
     private String swapId;
-    private String price;
-    private String fee;
-    private String baseQty;
-    private String baseAsset;
+    @JsonProperty("swapTime")
+    private Long swapTime;
+    @JsonProperty("status")
+    private Integer status;
+    @JsonProperty("quoteAsset")
     private String quoteAsset;
-    private SwapStatus status;
+    @JsonProperty("baseAsset")
+    private String baseAsset;
+    @JsonProperty("quoteQty")
+    private double quoteQty;
+    @JsonProperty("baseQty")
+    private double baseQty;
+    @JsonProperty("price")
+    private double price;
+    @JsonProperty("fee")
+    private double fee;
 
-    public String getQuoteQty() {
-        return quoteQty;
-    }
-
-    public void setQuoteQty(String quoteQty) {
-        this.quoteQty = quoteQty;
-    }
-
-    public Long getSwapTime() {
-        return swapTime;
-    }
-
-    public void setSwapTime(Long swapTime) {
-        this.swapTime = swapTime;
-    }
-
-    public String getSwapId() {
-        return swapId;
-    }
-
-    public void setSwapId(String swapId) {
-        this.swapId = swapId;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getFee() {
-        return fee;
-    }
-
-    public void setFee(String fee) {
-        this.fee = fee;
-    }
-
-    public String getBaseQty() {
-        return baseQty;
-    }
-
-    public void setBaseQty(String baseQty) {
-        this.baseQty = baseQty;
+    public String getQuoteAsset() {
+        return quoteAsset;
     }
 
     public String getBaseAsset() {
         return baseAsset;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public double getBaseQty() {
+        return baseQty;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public double getQuoteQty() {
+        return quoteQty;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public Long getSwapTime() {
+        return swapTime;
+    }
+
+    public String getSwapId() {
+        return swapId;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void setBaseAsset(String baseAsset) {
         this.baseAsset = baseAsset;
     }
 
-    public String getQuoteAsset() {
-        return quoteAsset;
+    public void setBaseQty(double baseQty) {
+        this.baseQty = baseQty;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
     }
 
     public void setQuoteAsset(String quoteAsset) {
         this.quoteAsset = quoteAsset;
     }
 
-    public SwapStatus getStatus() {
-        return status;
+    public void setQuoteQty(double quoteQty) {
+        this.quoteQty = quoteQty;
     }
 
-    public void setStatus(SwapStatus status) {
-        this.status = status;
+    public void setSwapId(String swapId) {
+        this.swapId = swapId;
+    }
+
+    public void setSwapTime(Long swapTime) {
+        this.swapTime = swapTime;
     }
 
     @Override

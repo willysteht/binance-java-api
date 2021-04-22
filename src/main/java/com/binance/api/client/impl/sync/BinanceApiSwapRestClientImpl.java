@@ -103,14 +103,21 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
     }
 
     @Override
-    public SwapHistory getSwapHistory(String swapId) {
-        long timestamp = System.currentTimeMillis();
-        List<SwapHistory> history = executeSync(binanceApiService.getSwapHistory(swapId,
+    public List<SwapHistory> getSwapHistory(Long swapId, Long startTime, Long endTime, Integer status, String quoteAsset, String baseAsset, Long limit) {
+        return   executeSync(binanceApiService.getSwapHistory(
+                swapId,
+                startTime,
+                endTime,
+                status,quoteAsset,
+                baseAsset,
+                limit,
                 BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-                timestamp));
-        if (history != null && !history.isEmpty()) {
-            return history.get(0);
-        }
-        return null;
+                System.currentTimeMillis()));
     }
+
+    @Override
+    public List<SwapHistory> getSwapHistory() {
+        return getSwapHistory(null,null,null,null,null,null,null);
+    }
+
 }

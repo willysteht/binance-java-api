@@ -71,7 +71,7 @@ public interface BinanceApiSwapAsyncRestClient {
      * @param operationId
      * @return
      */
-    void getLiquidityOperationRecord(String operationId, BinanceApiCallback<LiquidityOperationRecord> callback);
+    void getLiquidityOperationRecord(Long operationId, BinanceApiCallback<List<LiquidityOperationRecord>> callback);
 
     /**
      * Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates.
@@ -97,5 +97,5 @@ public interface BinanceApiSwapAsyncRestClient {
               String baseAsset,
               String quoteQty, BinanceApiCallback<SwapRecord> callback);
 
-    void getSwapHistory(String swapId, BinanceApiCallback<SwapHistory> callback);
+    void getSwapHistory(Long swapId, BinanceApiCallback<SwapHistory> callback);
 }

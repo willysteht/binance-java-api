@@ -318,7 +318,12 @@ public interface BinanceApiService {
     @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
     @GET("/sapi/v1/bswap/liquidityOps")
     Call<List<LiquidityOperationRecord>> getLiquidityOperationRecord(
-            @Query("operationId") String operationId,
+            @Query("operationId") Long operationId,
+            @Query("poolId") Long poolId,
+            @Query("operation") String operation,
+            @Query("startTime") Long startTime,
+            @Query("endTime") Long endTime,
+            @Query("limit") Long limit,
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 

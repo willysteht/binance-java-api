@@ -64,9 +64,16 @@ public class BinanceApiSwapAsyncRestClientImpl implements BinanceApiSwapAsyncRes
     }
 
     @Override
-    public void getLiquidityOperationRecord(String operationId, BinanceApiCallback<LiquidityOperationRecord> callback) {
-        long timestamp = System.currentTimeMillis();
-        binanceApiService.getLiquidityOperationRecord(operationId, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp);
+    public void getLiquidityOperationRecord(Long operationId, BinanceApiCallback<List<LiquidityOperationRecord>> callback) {
+        binanceApiService.getLiquidityOperationRecord(
+                operationId,
+                null,
+                null,
+                null,
+                null,
+                null,
+                BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+                System.currentTimeMillis());
     }
 
     @Override
@@ -82,8 +89,8 @@ public class BinanceApiSwapAsyncRestClientImpl implements BinanceApiSwapAsyncRes
     }
 
     @Override
-    public void getSwapHistory(String swapId, BinanceApiCallback<SwapHistory> callback) {
+    public void getSwapHistory(Long swapId, BinanceApiCallback<SwapHistory> callback) {
         long timestamp = System.currentTimeMillis();
-        binanceApiService.getSwapHistory(swapId, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp);
+        binanceApiService.getSwapHistory(swapId,null,null,null,null,null,null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp);
     }
 }

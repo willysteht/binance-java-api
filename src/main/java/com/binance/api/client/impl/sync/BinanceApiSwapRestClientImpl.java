@@ -72,16 +72,21 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
     }
 
     @Override
-    public LiquidityOperationRecord getLiquidityOperationRecord(String operationId) {
-        long timestamp = System.currentTimeMillis();
-        List<LiquidityOperationRecord> records = executeSync(binanceApiService.getLiquidityOperationRecord(
+    public List<LiquidityOperationRecord> getPoolLiquidityOperationRecords(Long operationId, Long poolId, String operation, Long startTime, Long endTime, Long limit) {
+        return executeSync(binanceApiService.getLiquidityOperationRecord(
                 operationId,
+                poolId,
+                operation,
+                startTime,
+                endTime,
+                limit,
                 BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-                timestamp));
-        if (records != null && !records.isEmpty()) {
-            return records.get(0);
-        }
-        return null;
+                System.currentTimeMillis()));
+    }
+
+    @Override
+    public List<LiquidityOperationRecord> getLiquidityOperationRecord(Long operationId) {
+        return getPoolLiquidityOperationRecords(operationId,null,null,null,null,null);
     }
 
     @Override

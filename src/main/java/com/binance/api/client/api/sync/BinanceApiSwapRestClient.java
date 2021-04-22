@@ -58,13 +58,22 @@ public interface BinanceApiSwapRestClient {
             String poolId,
             Integer limit);
 
+
+    List<LiquidityOperationRecord> getPoolLiquidityOperationRecords(
+            Long operationId,
+            Long poolId,
+            String operation,
+            Long startTime,
+            Long endTime,
+            Long limit);
+
     /**
      * Get liquidity operation (add/remove) record.
      *
      * @param operationId
      * @return
      */
-    LiquidityOperationRecord getLiquidityOperationRecord(String operationId);
+    List<LiquidityOperationRecord> getLiquidityOperationRecord(Long operationId);
 
     /**
      * Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates.

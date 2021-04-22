@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SwapHistory {
     @JsonProperty("swapId")
-    private String swapId;
+    private Long swapId;
     @JsonProperty("swapTime")
     private Long swapTime;
     @JsonProperty("status")
@@ -67,7 +67,7 @@ public class SwapHistory {
         return swapTime;
     }
 
-    public String getSwapId() {
+    public Long getSwapId() {
         return swapId;
     }
 
@@ -99,7 +99,7 @@ public class SwapHistory {
         this.quoteQty = quoteQty;
     }
 
-    public void setSwapId(String swapId) {
+    public void setSwapId(Long swapId) {
         this.swapId = swapId;
     }
 

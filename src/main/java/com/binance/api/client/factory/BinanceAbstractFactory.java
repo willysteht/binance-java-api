@@ -112,6 +112,11 @@ public abstract class BinanceAbstractFactory {
         return BinanceFuturesApiClientFactory.newInstance(apiKey, secretKey, apiUrl, websocketUrl);
     }
 
+    public static BinanceSavingApiClientFactory createSavingFactory(String apiKey, String secretKey) {
+        final String apiUrl = getApiUrl(SpotApiConfig.class);
+        return BinanceSavingApiClientFactory.newInstance(apiKey, secretKey, apiUrl);
+    }
+
     /**
      * Basic and simple create testnet engine factory .
      *

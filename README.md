@@ -7,6 +7,8 @@ binance-java-api is a lightweight Java library for interacting with the [Binance
 * Support for User Data, Trade, Kline, and Depth event streaming using [Binance WebSocket API](https://www.binance.com/restapipub.html#wss-endpoint).
 
 ## Installation
+### Locally
+1. clone this repository
 1. Install library into your Maven's local repository by running `mvn install`
 2. Add the following Maven dependency to your project's `pom.xml`:
 ```
@@ -17,7 +19,10 @@ binance-java-api is a lightweight Java library for interacting with the [Binance
 </dependency>
 ```
 
-Alternatively, you can clone this repository and run the [examples](https://github.com/joaopsilva/binance-java-api/tree/master/src/test/java/com/binance/api/examples).
+### From JitPack
+Go to following link to get instructions for installing latest version: https://jitpack.io/#KillerInk/binance-java-api
+
+> For now there is no version submitted to maven central.
 
 ## Examples
 
@@ -25,11 +30,11 @@ Alternatively, you can clone this repository and run the [examples](https://gith
 
 There are three main client classes that can be used to interact with the API:
 
-1. [`BinanceApiRestClient`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiRestClient.java), a synchronous/blocking [Binance API](https://www.binance.com/restapipub.html) client;
-2. [`BinanceApiAsyncRestClient`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiAsyncRestClient.java), an asynchronous/non-blocking [Binance API](https://www.binance.com/restapipub.html) client;
-3. [`BinanceApiWebSocketClient`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiWebSocketClient.java), a data streaming client using [Binance WebSocket API](https://www.binance.com/restapipub.html#wss-endpoint).
+1. [`BinanceApiRestClient`](src/main/java/com/binance/api/client/BinanceApiRestClient.java), a synchronous/blocking [Binance API](https://www.binance.com/restapipub.html) client;
+2. [`BinanceApiAsyncRestClient`](src/main/java/com/binance/api/client/BinanceApiAsyncRestClient.java), an asynchronous/non-blocking [Binance API](https://www.binance.com/restapipub.html) client;
+3. [`BinanceApiWebSocketClient`](src/main/java/com/binance/api/client/BinanceApiWebSocketClient.java), a data streaming client using [Binance WebSocket API](https://www.binance.com/restapipub.html#wss-endpoint).
 
-These can be instantiated through the corresponding factory method of [`BinanceApiClientFactory`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiClientFactory.java), by passing the [security parameters](https://www.binance.com/restapipub.html#user-content-endpoint-security-type) `API-KEY` and `SECRET`, which can be created at [https://www.binance.com/userCenter/createApi.html](https://www.binance.com/userCenter/createApi.html).
+These can be instantiated through the corresponding factory method of [`BinanceApiClientFactory`](src/main/java/com/binance/api/client/BinanceApiClientFactory.java), by passing the [security parameters](https://www.binance.com/restapipub.html#user-content-endpoint-security-type) `API-KEY` and `SECRET`, which can be created at [https://www.binance.com/userCenter/createApi.html](https://www.binance.com/userCenter/createApi.html).
 
 ```java
 BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("API-KEY", "SECRET");
@@ -520,4 +525,4 @@ Invalid symbol
 </details>
 
 ### More examples
-An extensive set of examples, covering most aspects of the API, can be found at https://github.com/joaopsilva/binance-java-api/tree/master/src/test/java/com/binance/api/examples.
+An extensive set of examples, covering most aspects of the API, can be found at [here](src/test/java/com/binance/api/examples/).

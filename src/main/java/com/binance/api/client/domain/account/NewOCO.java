@@ -1,7 +1,7 @@
 package com.binance.api.client.domain.account;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderSide;
 import com.binance.api.client.domain.TimeInForce;
@@ -220,7 +220,7 @@ public class NewOCO {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol)
+        return new ToStringBuilder().append("symbol", symbol)
                 .append("listClientOrderId", listClientOrderId)
                 .append("side", side)
                 .append("quantity", quantity)

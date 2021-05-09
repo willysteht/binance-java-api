@@ -1,7 +1,8 @@
 package com.binance.api.client.domain.account.request;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
+
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 
 public class CancelOrderListRequest {
@@ -77,7 +78,7 @@ public class CancelOrderListRequest {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol).append("orderListId", orderListId).append("listClientOrderId", listClientOrderId).append("newClientOrderId", newClientOrderId).append("recvWindow", recvWindow).append("timestamp", timestamp).toString();
+        return new ToStringBuilder().append("symbol", symbol).append("orderListId", orderListId).append("listClientOrderId", listClientOrderId).append("newClientOrderId", newClientOrderId).append("recvWindow", recvWindow).append("timestamp", timestamp).toString();
     }
 
 }

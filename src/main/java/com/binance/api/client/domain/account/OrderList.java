@@ -2,8 +2,8 @@ package com.binance.api.client.domain.account;
 
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.binance.api.client.ToStringBuilder;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.ContingencyType;
 import com.binance.api.client.domain.OCOOrderStatus;
@@ -98,7 +98,7 @@ public class OrderList {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+        return new ToStringBuilder()
                 .append("orderListId", orderListId)
                 .append("contingencyType", contingencyType)
                 .append("listStatusType", listStatusType)

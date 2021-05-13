@@ -2,7 +2,12 @@ package com.binance.api.client.api.async;
 
 import com.binance.api.client.api.BinanceApiCallback;
 import com.binance.api.client.domain.SwapRemoveType;
-import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.swap.Liquidity;
+import com.binance.api.client.domain.swap.LiquidityOperationRecord;
+import com.binance.api.client.domain.swap.Pool;
+import com.binance.api.client.domain.swap.SwapHistory;
+import com.binance.api.client.domain.swap.SwapQuote;
+import com.binance.api.client.domain.swap.SwapRecord;
 
 import java.util.List;
 
@@ -61,17 +66,8 @@ public interface BinanceApiSwapAsyncRestClient {
      * @param limit
      * @return
      */
-    void getPoolLiquidityOperationRecords(String poolId,
-                                          Integer limit,
-                                          BinanceApiCallback<List<LiquidityOperationRecord>> callback);
+    void getLiquidityOperationRecord(Long operationId, Long poolId,String operation, Long startTime,Long endTime, Long limit, BinanceApiCallback<List<LiquidityOperationRecord>> callback);
 
-    /**
-     * Get liquidity operation (add/remove) record.
-     *
-     * @param operationId
-     * @return
-     */
-    void getLiquidityOperationRecord(Long operationId, BinanceApiCallback<List<LiquidityOperationRecord>> callback);
 
     /**
      * Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates.

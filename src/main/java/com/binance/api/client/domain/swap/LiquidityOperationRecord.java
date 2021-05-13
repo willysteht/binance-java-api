@@ -1,6 +1,6 @@
-package com.binance.api.client.domain.account;
+package com.binance.api.client.domain.swap;
 
-import com.binance.api.client.domain.LiquidityOperationRecordStatus;
+import com.binance.api.client.domain.swap.LiquidityOperationRecordStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

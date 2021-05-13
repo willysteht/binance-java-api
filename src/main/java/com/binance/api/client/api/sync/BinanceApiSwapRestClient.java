@@ -1,9 +1,12 @@
 package com.binance.api.client.api.sync;
 
 import com.binance.api.client.domain.SwapRemoveType;
-import com.binance.api.client.domain.account.*;
-import retrofit2.Call;
-import retrofit2.http.Query;
+import com.binance.api.client.domain.swap.Liquidity;
+import com.binance.api.client.domain.swap.LiquidityOperationRecord;
+import com.binance.api.client.domain.swap.Pool;
+import com.binance.api.client.domain.swap.SwapHistory;
+import com.binance.api.client.domain.swap.SwapQuote;
+import com.binance.api.client.domain.swap.SwapRecord;
 
 import java.util.List;
 
@@ -47,17 +50,6 @@ public interface BinanceApiSwapRestClient {
      */
     LiquidityOperationRecord removeLiquidity(String poolId, SwapRemoveType type, List<String> asset, String shareAmount);
 
-    /**
-     * Get liquidity operation (add/remove) records of a pool
-     *
-     * @param poolId
-     * @param limit
-     * @return
-     */
-    List<LiquidityOperationRecord> getPoolLiquidityOperationRecords(
-            String poolId,
-            Integer limit);
-
 
     List<LiquidityOperationRecord> getPoolLiquidityOperationRecords(
             Long operationId,
@@ -67,13 +59,6 @@ public interface BinanceApiSwapRestClient {
             Long endTime,
             Long limit);
 
-    /**
-     * Get liquidity operation (add/remove) record.
-     *
-     * @param operationId
-     * @return
-     */
-    List<LiquidityOperationRecord> getLiquidityOperationRecord(Long operationId);
 
     /**
      * Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates.

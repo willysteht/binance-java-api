@@ -1,5 +1,8 @@
 package com.binance.api.client.api;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderSide;
 import com.binance.api.client.domain.OrderType;
@@ -7,6 +10,7 @@ import com.binance.api.client.domain.SwapRemoveType;
 import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshot;
 import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
@@ -391,5 +395,24 @@ public interface BinanceApiService {
             @Query("size") Long size,
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp
+    );
+    /**
+     * Name 	Type 	Mandatory 	Description
+     * type 	STRING 	YES 	"SPOT", "MARGIN", "FUTURES"
+     * startTime 	LONG 	NO
+     * endTime 	LONG 	NO
+     * limit 	INT 	NO 	min 5, max 30, default 5
+     * recvWindow 	LONG 	NO
+     * timestamp 	LONG 	YES
+     */
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/sapi/v1/accountSnapshot")
+    Call<List<DailyAccountSnapshot>> getDailyAccountSnapShot(
+            @Query("type") @NonNull String type,
+            @Query("startTime") @Nullable Long startTime,
+            @Query("endTime") @Nullable Long endTime,
+            @Query("limit") @Nullable Long limit,
+            @Query("recvWindow") @Nullable Long recvWindow,
+            @Query("timestamp") @NonNull Long timestamp
     );
 }

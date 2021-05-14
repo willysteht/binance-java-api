@@ -6,15 +6,16 @@ import androidx.annotation.Nullable;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderSide;
 import com.binance.api.client.domain.OrderType;
-import com.binance.api.client.domain.SwapRemoveType;
 import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.account.request.CancelOrderListResponse;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshot;
 import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
 import com.binance.api.client.domain.market.*;
+
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -129,6 +130,29 @@ public interface BinanceApiService {
                                    @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/api/v3/order/oco")
+    Call<NewOCOResponse> newOCO(@Query("symbol") String symbol, @Query("listClientOrderId") String listClientOrderId, @Query("side") OrderSide side,
+                                @Query("quantity") String quantity, @Query("limitClientOrderId") String limitClientOrderId, @Query("price") String price,
+                                @Query("limitIcebergQty") String limitIcebergQty, @Query("stopClientOrderId")String stopClientOrderId, @Query("stopPrice") String stopPrice,
+                                @Query("stopLimitPrice")String stopLimitPrice, @Query("stopIcebergQty") String stopIcebergQty, @Query("stopLimitTimeInForce") TimeInForce stopLimitTimeInForce,
+                                @Query("newOrderRespType") NewOrderResponseType newOrderRespType, @Query("recvWindow") Long recvWindow, @Query("timestamp") long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @DELETE("/api/v3/orderList")
+    Call<CancelOrderListResponse> cancelOrderList(@Query("symbol") String symbol, @Query("orderListId") Long orderListId, @Query("listClientOrderId") String listClientOrderId,
+                                                  @Query("newClientOrderId") String newClientOrderId, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/api/v3/orderList")
+    Call<OrderList> getOrderListStatus(@Query("orderListId") Long orderListId, @Query("origClientOrderId") String origClientOrderId,
+                                       @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/api/v3/allOrderList")
+    Call<List<OrderList>> getAllOrderList(@Query("fromId") Long fromId, @Query("startTime") Long startTime, @Query("endTime") Long endTime,
+                                          @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/account")
     Call<Account> getAccount(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
@@ -190,6 +214,10 @@ public interface BinanceApiService {
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/wapi/v3/depositAddress.html")
     Call<DepositAddress> getDepositAddress(@Query("asset") String asset, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/sapi/v1/asset/dust")
+    Call<DustTransferResponse> dustTransfer(@Query("asset") List<String> asset, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/sub-account/transfer/subUserHistory")
@@ -284,96 +312,8 @@ public interface BinanceApiService {
     Call<Void> closeAliveMarginUserDataStream(@Query("listenKey") String listenKey);
     // Binance Liquidity Swap Pool endpoints
 
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @GET("/sapi/v1/bswap/pools")
-    Call<List<Pool>> listAllSwapPools();
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @GET("/sapi/v1/bswap/liquidity")
-    Call<List<Liquidity>> getPoolLiquidityInfo(@Query("poolId") String poolId,
-                                               @Query("recvWindow") Long recvWindow,
-                                               @Query("timestamp") Long timestamp);
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @POST("/sapi/v1/bswap/liquidityAdd")
-    Call<LiquidityOperationRecord> addLiquidity(@Query("poolId") String poolId,
-                                                @Query("asset") String asset,
-                                                @Query("quantity") String quantity,
-                                                @Query("recvWindow") Long recvWindow,
-                                                @Query("timestamp") Long timestamp);
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @POST("/sapi/v1/bswap/liquidityRemove")
-    Call<LiquidityOperationRecord> removeLiquidity(@Query("poolId") String poolId,
-                                                   @Query("type") SwapRemoveType type,
-                                                   @Query("asset") List<String> asset,
-                                                   @Query("shareAmount") String shareAmount,
-                                                   @Query("recvWindow") Long recvWindow,
-                                                   @Query("timestamp") Long timestamp);
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @GET("/sapi/v1/bswap/liquidityOps")
-    Call<List<LiquidityOperationRecord>> getPoolLiquidityOperationRecords(
-            @Query("poolId") String poolId,
-            @Query("limit") Integer limit,
-            @Query("recvWindow") Long recvWindow,
-            @Query("timestamp") Long timestamp);
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @GET("/sapi/v1/bswap/liquidityOps")
-    Call<List<LiquidityOperationRecord>> getLiquidityOperationRecord(
-            @Query("operationId") Long operationId,
-            @Query("poolId") Long poolId,
-            @Query("operation") String operation,
-            @Query("startTime") Long startTime,
-            @Query("endTime") Long endTime,
-            @Query("limit") Long limit,
-            @Query("recvWindow") Long recvWindow,
-            @Query("timestamp") Long timestamp);
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @GET("/sapi/v1/bswap/quote")
-    Call<SwapQuote> requestQuote(
-            @Query("quoteAsset") String quoteAsset,
-            @Query("baseAsset") String baseAsset,
-            @Query("quoteQty") String quoteQty,
-            @Query("recvWindow") Long recvWindow,
-            @Query("timestamp") Long timestamp);
-
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @POST("/sapi/v1/bswap/swap")
-    Call<SwapRecord> swap(
-            @Query("quoteAsset") String quoteAsset,
-            @Query("baseAsset") String baseAsset,
-            @Query("quoteQty") String quoteQty,
-            @Query("recvWindow") Long recvWindow,
-            @Query("timestamp") Long timestamp);
 
 
-    /*
-    Name 	    Type 	Mandatory 	Description
-    swapId 	    LONG 	NO
-    startTime 	LONG 	NO
-    endTime 	LONG 	NO
-    status 	    INT 	NO 	0: pending for swap, 1: success, 2: failed
-    quoteAsset 	STRING 	NO
-    baseAsset 	STRING 	NO
-    limit 	    LONG 	NO 	default 3, max 100
-    recvWindow 	LONG 	NO
-    timestamp 	LONG 	YES
-     */
-    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-    @GET("/sapi/v1/bswap/swap")
-    Call<List<SwapHistory>> getSwapHistory(
-            @Query("swapId") Long swapId,
-            @Query("startTime") Long startTime,
-            @Query("endTime") Long endTime,
-            @Query("status") Integer status,
-            @Query("quoteAsset") String quoteAsset,
-            @Query("baseAsset") String baseAsset,
-            @Query("limit") Long limit,
-            @Query("recvWindow") Long recvWindow,
-            @Query("timestamp") Long timestamp);
 
     /*
     Name 	Type 	Mandatory 	Description
@@ -415,4 +355,6 @@ public interface BinanceApiService {
             @Query("recvWindow") @Nullable Long recvWindow,
             @Query("timestamp") @NonNull Long timestamp
     );
+
+
 }

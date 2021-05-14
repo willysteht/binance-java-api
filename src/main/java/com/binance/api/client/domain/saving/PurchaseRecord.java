@@ -38,8 +38,8 @@ public class PurchaseRecord {
     String amount;
     @JsonProperty("asset")
     String asset;
-    @JsonProperty("creatTime")
-    Long creatTime;
+    @JsonProperty("createTime")
+    Long createTime;
     @JsonProperty("lot")
     Long lot;
     @JsonProperty("productName")
@@ -61,8 +61,8 @@ public class PurchaseRecord {
         this.asset = asset;
     }
 
-    public void setCreatTime(Long creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     public void setLot(Long lot) {
@@ -90,7 +90,7 @@ public class PurchaseRecord {
     }
 
     public Long getCreatTime() {
-        return creatTime;
+        return createTime;
     }
 
     public Long getLot() {

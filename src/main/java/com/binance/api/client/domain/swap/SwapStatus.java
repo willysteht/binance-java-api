@@ -1,10 +1,10 @@
-package com.binance.api.client.domain;
+package com.binance.api.client.domain.swap;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public enum LiquidityOperationRecordStatus {
+public enum SwapStatus {
     PENDING,
     SUCCESS,
     FAILED;
@@ -14,3 +14,5 @@ public enum LiquidityOperationRecordStatus {
         return ordinal();
     }
 }
+
+

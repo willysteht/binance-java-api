@@ -2,7 +2,11 @@ package com.binance.api.client.api.sync;
 
 import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.account.request.AllOrderListRequest;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListResponse;
+import com.binance.api.client.domain.account.request.OrderListStatusRequest;
 import com.binance.api.client.domain.market.BookTicker;
 import com.binance.api.client.domain.market.TickerPrice;
 
@@ -48,6 +52,7 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
      * @param order the new TEST order to submit.
      */
     void newOrderTest(NewOrder order);
+
 
     /**
      * Get current account information.
@@ -153,4 +158,43 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
     void closeUserDataStream(String listenKey);
 
     WalletEndpoint getWalletEndPoint();
+
+    /**
+     * Send in a new OCO;
+     *
+     * @param oco
+     *            the OCO to submit
+     * @return a response containing details about the newly placed OCO.
+     */
+    NewOCOResponse newOCO(NewOCO oco);
+
+    /**
+     * Cancel an entire Order List
+     *
+     * @return
+     */
+    CancelOrderListResponse cancelOrderList(CancelOrderListRequest cancelOrderListRequest);
+
+    /**
+     * Check an order list status
+     *
+     * @param orderListStatusRequest
+     * @return an orderList
+     */
+    OrderList getOrderListStatus(OrderListStatusRequest orderListStatusRequest);
+
+    /**
+     * Get all list os orders
+     *
+     * @param allOrderListRequest
+     * @return
+     */
+    List<OrderList> getAllOrderList(AllOrderListRequest allOrderListRequest);
+
+    /**
+     * Conver a list of assets to BNB
+     * @param asset the list of assets to convert
+     */
+    DustTransferResponse dustTranfer(List<String> asset);
+
 }

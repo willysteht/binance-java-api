@@ -1,10 +1,15 @@
 package com.binance.api.client.impl.sync;
 
+import com.binance.api.client.api.BinanceSwapApiService;
 import com.binance.api.client.api.sync.BinanceApiSwapRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.SwapRemoveType;
-import com.binance.api.client.domain.account.*;
-import com.binance.api.client.api.BinanceApiService;
+import com.binance.api.client.domain.swap.Liquidity;
+import com.binance.api.client.domain.swap.LiquidityOperationRecord;
+import com.binance.api.client.domain.swap.Pool;
+import com.binance.api.client.domain.swap.SwapHistory;
+import com.binance.api.client.domain.swap.SwapQuote;
+import com.binance.api.client.domain.swap.SwapRecord;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
 
 import java.util.List;
@@ -16,10 +21,10 @@ import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync
  */
 public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
 
-    private final BinanceApiService binanceApiService;
+    private final BinanceSwapApiService binanceApiService;
 
     public BinanceApiSwapRestClientImpl(String apiKey, String secret, String apiUrl) {
-        binanceApiService = BinanceApiServiceGenerator.createService(BinanceApiService.class, apiKey, secret, apiUrl);
+        binanceApiService = BinanceApiServiceGenerator.createService(BinanceSwapApiService.class, apiKey, secret, apiUrl);
     }
 
     @Override
@@ -61,19 +66,8 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
     }
 
     @Override
-    public List<LiquidityOperationRecord> getPoolLiquidityOperationRecords(String poolId, Integer limit) {
-        long timestamp = System.currentTimeMillis();
-        return executeSync(binanceApiService.getPoolLiquidityOperationRecords(
-                poolId,
-                limit,
-                BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-                timestamp));
-
-    }
-
-    @Override
     public List<LiquidityOperationRecord> getPoolLiquidityOperationRecords(Long operationId, Long poolId, String operation, Long startTime, Long endTime, Long limit) {
-        return executeSync(binanceApiService.getLiquidityOperationRecord(
+        return executeSync(binanceApiService.getLiquidityOperationRecords(
                 operationId,
                 poolId,
                 operation,
@@ -82,11 +76,6 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
                 limit,
                 BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
                 System.currentTimeMillis()));
-    }
-
-    @Override
-    public List<LiquidityOperationRecord> getLiquidityOperationRecord(Long operationId) {
-        return getPoolLiquidityOperationRecords(operationId,null,null,null,null,null);
     }
 
     @Override

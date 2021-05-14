@@ -1,4 +1,4 @@
-package com.binance.api.client.domain.account;
+package com.binance.api.client.domain.swap;
 
 import java.util.Map;
 

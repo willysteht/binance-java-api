@@ -1,14 +1,10 @@
 package com.binance.api.client.api.sync;
 
-import com.binance.api.client.api.BinanceApiCallback;
-import com.binance.api.client.domain.account.Liquidity;
 import com.binance.api.client.domain.saving.InterestHistory;
 import com.binance.api.client.domain.saving.PurchaseRecord;
 import com.binance.api.client.domain.saving.RedemptionRecord;
 
 import java.util.List;
-
-import retrofit2.http.Query;
 
 public interface BinanceApiSavingRestClient {
 

@@ -1,11 +1,18 @@
 package com.binance.api.client.impl.sync;
 
+import androidx.annotation.Nullable;
+
 import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.api.BinanceApiService;
 import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapShotSpot;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshot;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotFutures;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotMargin;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotTypes;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
@@ -289,5 +296,20 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     @Override
     public DustTransferResponse dustTranfer(List<String> asset) {
         return executeSync(binanceApiService.dustTransfer(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public DailyAccountSnapShotSpot getDailyAccountSnapShotSpot(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
+        return executeSync(binanceApiService.getDailyAccountSnapShotSpot(DailyAccountSnapshotTypes.SPOT.name(),startTime,endTime,limit,BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public DailyAccountSnapshotMargin getDailyAccountSnapShotMargin(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
+        return executeSync(binanceApiService.getDailyAccountSnapShotMargin(DailyAccountSnapshotTypes.MARGIN.name(),startTime,endTime,limit,BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public DailyAccountSnapshotFutures getDailyAccountSnapShotFutures(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
+        return executeSync(binanceApiService.getDailyAccountSnapShotFutures(DailyAccountSnapshotTypes.FUTURES.name(),startTime,endTime,limit,BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 }

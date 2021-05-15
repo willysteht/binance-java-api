@@ -1,5 +1,8 @@
 package com.binance.api.client.api.sync;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.AllOrderListRequest;
@@ -7,10 +10,16 @@ import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderListRequest;
 import com.binance.api.client.domain.account.request.CancelOrderListResponse;
 import com.binance.api.client.domain.account.request.OrderListStatusRequest;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapShotSpot;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshot;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotFutures;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotMargin;
 import com.binance.api.client.domain.market.BookTicker;
 import com.binance.api.client.domain.market.TickerPrice;
 
 import java.util.List;
+
+import retrofit2.http.Query;
 
 /**
  * Binance API facade, supporting synchronous/blocking access Binance's REST API.
@@ -196,5 +205,23 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
      * @param asset the list of assets to convert
      */
     DustTransferResponse dustTranfer(List<String> asset);
+
+    DailyAccountSnapShotSpot getDailyAccountSnapShotSpot(
+            @Query("startTime") @Nullable Long startTime,
+            @Query("endTime") @Nullable Long endTime,
+            @Query("limit") @Nullable Long limit
+    );
+
+    DailyAccountSnapshotMargin getDailyAccountSnapShotMargin(
+            @Query("startTime") @Nullable Long startTime,
+            @Query("endTime") @Nullable Long endTime,
+            @Query("limit") @Nullable Long limit
+    );
+
+    DailyAccountSnapshotFutures getDailyAccountSnapShotFutures(
+            @Query("startTime") @Nullable Long startTime,
+            @Query("endTime") @Nullable Long endTime,
+            @Query("limit") @Nullable Long limit
+    );
 
 }

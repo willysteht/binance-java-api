@@ -10,7 +10,11 @@ import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderListResponse;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapShotSpot;
 import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshot;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotFutures;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotMargin;
+import com.binance.api.client.domain.account.snapshot.DailyAccountSnapshotTypes;
 import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
@@ -345,9 +349,10 @@ public interface BinanceApiService {
      * recvWindow 	LONG 	NO
      * timestamp 	LONG 	YES
      */
+
     @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
     @GET("/sapi/v1/accountSnapshot")
-    Call<List<DailyAccountSnapshot>> getDailyAccountSnapShot(
+    Call<DailyAccountSnapShotSpot> getDailyAccountSnapShotSpot(
             @Query("type") @NonNull String type,
             @Query("startTime") @Nullable Long startTime,
             @Query("endTime") @Nullable Long endTime,
@@ -356,5 +361,25 @@ public interface BinanceApiService {
             @Query("timestamp") @NonNull Long timestamp
     );
 
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/sapi/v1/accountSnapshot")
+    Call<DailyAccountSnapshotMargin> getDailyAccountSnapShotMargin(
+            @Query("type") @NonNull String type,
+            @Query("startTime") @Nullable Long startTime,
+            @Query("endTime") @Nullable Long endTime,
+            @Query("limit") @Nullable Long limit,
+            @Query("recvWindow") @Nullable Long recvWindow,
+            @Query("timestamp") @NonNull Long timestamp
+    );
 
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/sapi/v1/accountSnapshot")
+    Call<DailyAccountSnapshotFutures> getDailyAccountSnapShotFutures(
+            @Query("type") @NonNull String type,
+            @Query("startTime") @Nullable Long startTime,
+            @Query("endTime") @Nullable Long endTime,
+            @Query("limit") @Nullable Long limit,
+            @Query("recvWindow") @Nullable Long recvWindow,
+            @Query("timestamp") @NonNull Long timestamp
+    );
 }

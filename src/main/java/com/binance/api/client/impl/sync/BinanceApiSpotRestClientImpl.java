@@ -300,16 +300,16 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
 
     @Override
     public DailyAccountSnapShotSpot getDailyAccountSnapShotSpot(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
-        return executeSync(binanceApiService.getDailyAccountSnapShotSpot(DailyAccountSnapshotTypes.SPOT.name(),startTime,endTime,limit,BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+        return executeSync(binanceApiService.getDailyAccountSnapShotSpot(DailyAccountSnapshotTypes.SPOT.name(),startTime,endTime,limit,null, System.currentTimeMillis()));
     }
 
     @Override
     public DailyAccountSnapshotMargin getDailyAccountSnapShotMargin(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
-        return executeSync(binanceApiService.getDailyAccountSnapShotMargin(DailyAccountSnapshotTypes.MARGIN.name(),startTime,endTime,limit,BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+        return executeSync(binanceApiService.getDailyAccountSnapShotMargin(DailyAccountSnapshotTypes.MARGIN.name(),startTime,endTime,limit,null, System.currentTimeMillis()));
     }
 
     @Override
     public DailyAccountSnapshotFutures getDailyAccountSnapShotFutures(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
-        return executeSync(binanceApiService.getDailyAccountSnapShotFutures(DailyAccountSnapshotTypes.FUTURES.name(),startTime,endTime,limit,BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+        return executeSync(binanceApiService.getDailyAccountSnapShotFutures(DailyAccountSnapshotTypes.FUTURES.name(),startTime,endTime,limit,null, System.currentTimeMillis()));
     }
 }

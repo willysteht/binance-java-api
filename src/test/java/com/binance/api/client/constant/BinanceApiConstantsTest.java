@@ -3,6 +3,7 @@ package com.binance.api.client.constant;
 import com.binance.api.client.domain.market.Candlestick;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

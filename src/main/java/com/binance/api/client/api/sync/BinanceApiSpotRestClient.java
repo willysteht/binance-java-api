@@ -1,7 +1,7 @@
 package com.binance.api.client.api.sync;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
+
 
 import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.domain.account.*;
@@ -207,21 +207,21 @@ public interface BinanceApiSpotRestClient extends BinanceApiGeneralRestClient {
     DustTransferResponse dustTranfer(List<String> asset);
 
     DailyAccountSnapShotSpot getDailyAccountSnapShotSpot(
-            @Query("startTime") @Nullable Long startTime,
-            @Query("endTime") @Nullable Long endTime,
-            @Query("limit") @Nullable Long limit
+            @Query("startTime")  Long startTime,
+            @Query("endTime")  Long endTime,
+            @Query("limit")  Long limit
     );
 
     DailyAccountSnapshotMargin getDailyAccountSnapShotMargin(
-            @Query("startTime") @Nullable Long startTime,
-            @Query("endTime") @Nullable Long endTime,
-            @Query("limit") @Nullable Long limit
+            @Query("startTime")  Long startTime,
+            @Query("endTime")  Long endTime,
+            @Query("limit")  Long limit
     );
 
     DailyAccountSnapshotFutures getDailyAccountSnapShotFutures(
-            @Query("startTime") @Nullable Long startTime,
-            @Query("endTime") @Nullable Long endTime,
-            @Query("limit") @Nullable Long limit
+            @Query("startTime")  Long startTime,
+            @Query("endTime")  Long endTime,
+            @Query("limit")  Long limit
     );
 
 }

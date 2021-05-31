@@ -26,7 +26,7 @@ public class SwapEndpointExample {
         SwapQuote swapQuote = swapClient.requestQuote("USDT", "USDC", "10");
         System.out.println(swapQuote);
         SwapRecord swapRecord = swapClient.swap("USDT", "USDC", "10");
-        SwapHistory swapHistory = swapClient.getSwapHistory(swapRecord.getSwapId());
-        System.out.println(swapHistory);
+//        SwapHistory swapHistory = swapClient.getSwapHistory(swapRecord.getSwapId());
+//        System.out.println(swapHistory);
     }
 }

@@ -1,6 +1,6 @@
 package com.binance.api.client.impl.sync;
 
-import androidx.annotation.Nullable;
+
 
 import com.binance.api.client.WalletEndpoint;
 import com.binance.api.client.api.BinanceApiService;
@@ -299,17 +299,17 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
     }
 
     @Override
-    public DailyAccountSnapShotSpot getDailyAccountSnapShotSpot(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
+    public DailyAccountSnapShotSpot getDailyAccountSnapShotSpot( Long startTime,  Long endTime,  Long limit) {
         return executeSync(binanceApiService.getDailyAccountSnapShotSpot(DailyAccountSnapshotTypes.SPOT.name(),startTime,endTime,limit,null, System.currentTimeMillis()));
     }
 
     @Override
-    public DailyAccountSnapshotMargin getDailyAccountSnapShotMargin(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
+    public DailyAccountSnapshotMargin getDailyAccountSnapShotMargin( Long startTime,  Long endTime,  Long limit) {
         return executeSync(binanceApiService.getDailyAccountSnapShotMargin(DailyAccountSnapshotTypes.MARGIN.name(),startTime,endTime,limit,null, System.currentTimeMillis()));
     }
 
     @Override
-    public DailyAccountSnapshotFutures getDailyAccountSnapShotFutures(@Nullable Long startTime, @Nullable Long endTime, @Nullable Long limit) {
+    public DailyAccountSnapshotFutures getDailyAccountSnapShotFutures( Long startTime,  Long endTime,  Long limit) {
         return executeSync(binanceApiService.getDailyAccountSnapShotFutures(DailyAccountSnapshotTypes.FUTURES.name(),startTime,endTime,limit,null, System.currentTimeMillis()));
     }
 }

@@ -98,6 +98,26 @@ public interface BinanceApiGeneralRestClient {
     List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit, Long startTime, Long endTime);
 
     /**
+     * Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
+     *
+     * @param symbol    symbol to aggregate (mandatory)
+     * @param type	    ENUM Which Contract Type (mandatory)
+     * @param interval  candlestick interval (mandatory)
+     * @param limit     Default 500; max 1000 (optional)
+     * @param startTime Timestamp in ms to get candlestick bars from INCLUSIVE (optional).
+     * @param endTime   Timestamp in ms to get candlestick bars until INCLUSIVE (optional).
+     * @return a candlestick bar for the given symbol and interval and contract
+     */
+    List<Candlestick> getCandlestickBars(String symbol, ContractType type, CandlestickInterval interval, Long startTime, Long endTime, Integer limit);
+
+    /**
+     * Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
+     *
+     * @see #getCandlestickBars(String, ContractType, CandlestickInterval, Long, Long, Integer)
+     */
+    List<Candlestick> getCandlestickBars(String symbol, ContractType type, CandlestickInterval interval);
+
+    /**
      * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
      *
      * @see #getCandlestickBars(String, CandlestickInterval, Integer, Long, Long)

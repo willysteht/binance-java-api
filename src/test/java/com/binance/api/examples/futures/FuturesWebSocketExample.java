@@ -11,7 +11,7 @@ import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
  * @author Mahdi Sheikh Hosseini
  */
 public class FuturesWebSocketExample {
-    private static final String SYMBOL = "LINKUSDT";
+    private static final String SYMBOL = "BTCUSDTPERP";
 
     public static void main(String[] args) {
         BinanceFuturesApiClientFactory factory = BinanceAbstractFactory.createFuturesFactory();

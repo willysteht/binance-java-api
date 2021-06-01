@@ -18,6 +18,7 @@ import com.binance.api.client.domain.market.*;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
 import com.binance.api.client.impl.WalletEndPointImpl;
 
+import org.apache.commons.lang3.NotImplementedException;
 import retrofit2.Call;
 
 import java.util.List;
@@ -87,6 +88,16 @@ public class BinanceApiSpotRestClientImpl implements BinanceApiSpotRestClient {
                                                 Long startTime, Long endTime) {
         return executeSync(
                 binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(), startTime, endTime,limit));
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, ContractType type, CandlestickInterval interval, Long startTime, Long endTime, Integer limit) {
+        throw new NotImplementedException("No Contracts in Spot Api.");
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, ContractType type, CandlestickInterval interval) {
+        throw new NotImplementedException("No Contracts in Spot Api.");
     }
 
     @Override

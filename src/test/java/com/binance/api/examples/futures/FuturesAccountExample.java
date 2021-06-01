@@ -5,6 +5,8 @@ import com.binance.api.client.domain.account.FuturesAccount;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceFuturesApiClientFactory;
 
+import java.util.Properties;
+
 /**
  * Examples binance futures account information
  */

@@ -12,6 +12,7 @@ import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
 import com.binance.api.client.impl.BinanceApiServiceGenerator;
+import com.sun.istack.internal.NotNull;
 
 import java.util.List;
 
@@ -144,6 +145,16 @@ public class BinanceApiFuturesRestClientImpl implements BinanceApiFuturesRestCli
     @Override
     public List<AggTrade> getAggTrades(String symbol) {
         return executeSync(binanceApiService.getAggTrades(symbol, null, null, null, null));
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, @NotNull ContractType type, @NotNull CandlestickInterval interval) {
+        return getCandlestickBars(symbol, type, interval,null, null, null);
+    }
+
+    @Override
+    public List<Candlestick> getCandlestickBars(String symbol, ContractType type, CandlestickInterval interval, Long startTime, Long endTime, Integer limit) {
+        return executeSync(binanceApiService.getCandlestickBars(symbol, type.getType(), interval.getIntervalId(), startTime, endTime, limit));
     }
 
     @Override

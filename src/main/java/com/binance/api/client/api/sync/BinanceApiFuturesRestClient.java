@@ -67,5 +67,4 @@ public interface BinanceApiFuturesRestClient extends BinanceApiGeneralRestClient
     void changePositionSideMode(PositionSideType positionSideType);
 
     List<PositionInformation> getPositionInformation(String symbol);
-
 }

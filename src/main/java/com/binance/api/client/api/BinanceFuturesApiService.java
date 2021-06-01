@@ -52,6 +52,10 @@ public interface BinanceFuturesApiService {
     Call<List<Candlestick>> getCandlestickBars(@Query("symbol") String symbol, @Query("interval") String interval, @Query("limit") Integer limit,
                                                @Query("startTime") Long startTime, @Query("endTime") Long endTime);
 
+    @GET("/fapi/v1/continuousKlines")
+    Call<List<Candlestick>> getCandlestickBars(@Query("pair") String symbol, @Query("contractType") String contractType, @Query("interval") String interval, @Query("startTime") Long startTime, @Query("endTime") Long endTime,
+                                               @Query("limit") Integer limit);
+
     @GET("/fapi/v1/ticker/24hr")
     Call<TickerStatistics> get24HrPriceStatistics(@Query("symbol") String symbol);
 
